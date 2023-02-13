@@ -30,7 +30,10 @@ export class Watch extends EventTarget {
         button.innerText = 'Connect Touch SDK Controller'
         button.classList.add('touch-sdk-connect-button')
 
-        button.addEventListener('click', () => this.requestConnection())
+        button.addEventListener('click', () => {
+            this.requestConnection()
+            .catch(error => alert(error.message))
+        })
 
         this.addEventListener('device-selected', () => {
             button.style.display = 'none'
