@@ -6,7 +6,7 @@
 ![npm downloads](https://img.shields.io/npm/dm/touch-sdk)
 ![Discord](https://img.shields.io/discord/869474617729875998)
 
-Connects to Port 6 Touch SDK compatible Bluetooth devices – like [this WearOS app](https://play.google.com/store/apps/details?id=io.port6.watchbridge).
+Connects to Doublepoint Touch SDK compatible Bluetooth devices – like [this WearOS app](https://play.google.com/store/apps/details?id=io.port6.watchbridge).
 
 Works with Chrome-based browsers. ([more info](https://caniuse.com/?search=bluetooth))
 

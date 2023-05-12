@@ -1,7 +1,7 @@
 {
   "name": "touch-sdk",
   "version": "0.5.1",
-  "description": "Port 6 Touch SDK",
+  "description": "Doublepoint Touch SDK",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"No tests specified\"",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/port6io/touch-sdk-js.git"
+    "url": "git+https://github.com/doublepointlab/touch-sdk-js.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/port6io/touch-sdk-js/issues"
+    "url": "https://github.com/doublepointlab/touch-sdk-js/issues"
   },
-  "homepage": "https://github.com/port6io/touch-sdk-js#readme",
+  "homepage": "https://github.com/doublepointlab/touch-sdk-js#readme",
   "devDependencies": {
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0"
