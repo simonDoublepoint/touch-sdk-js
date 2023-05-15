@@ -6,14 +6,14 @@
 ![npm downloads](https://img.shields.io/npm/dm/touch-sdk)
 ![Discord](https://img.shields.io/discord/869474617729875998)
 
-Connects to Port 6 Touch SDK compatible Bluetooth devices – like [this WearOS app](https://play.google.com/store/apps/details?id=io.port6.watchbridge).
+Connects to Doublepoint Touch SDK compatible Bluetooth devices – like [this WearOS app](https://play.google.com/store/apps/details?id=io.port6.watchbridge).
 
 Works with Chrome-based browsers. ([more info](https://caniuse.com/?search=bluetooth))
 
 ## Importing (URL)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.1/dist/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.2/dist/main.js"></script>
 ```
 
 ```javascript
@@ -35,7 +35,7 @@ import { Watch } from 'touch-sdk'
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.1/dist/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.2/dist/main.js"></script>
     </head>
     <body>
         <script>
