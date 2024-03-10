@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>Touch SDK OSC Sender</title>
+        <script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.2/dist/main.js"></script>
+        <script src="../node_modules/osc-js/lib/osc.min.js"></script>
+		<link rel="stylesheet" href="../node_modules/uplot/dist/uPlot.min.css">
+		<script src="../node_modules/uplot/dist/uPlot.iife.min.js"></script>
+		<link rel="stylesheet" href="../src/style.css">
+    </head>
+    <body>
+		<div id="loading">
+        	<h2>Connecting to your Watch... </h2>
+			<h3>If you encounter a low framerate, <a id="pressReconnect" onclick="handleReconnection()">press reconnect</a><br>
+			
+
+
+			<h3 id="countDown">4</h3>
+			<br><br><br>
+			<h3><a onclick="document.getElementById('loading').style.display = 'none';">Close</a></h3>
+		
+		</div>
+		
+		<object id="doublepointLogo" type="image/svg+xml" data="../src/2pt_logo_train_light.svg">
+			<img src="../src/2pt_logo_train_light.png" />
+		  </object>
+		<div id="chart"></div>
+		<button class="reset" onclick="resetUPlotScriptAndValues()">Reset</button>
+		<section class="intro" >	
+			<div>
+				<h1 style="color: #fff;">Touch SDK <br><span style="color: #0078d4; margin-top: 20px;">Monitor</span></h1>
+			
+				<h3>This example the realtime IMU data stream from a connected watch and how Touch SDK events are sent as OSC messages to other applications.</h3>
+					
+			</div>
+			
+				<ol>
+					<li>To send OSC messages ensure OSC-Bridge is operational by running <br> <code style="color: #0078d4;">node &lt;pathToOscBridge.js&gt;</code></li>
+					<li>Refresh this page</li>
+					<li>Press Connect to pair Watch</li>
+					<li>Click on rows below to send only selected values</li>
+					<li>Move your arm, tap, rotate the dial, touch the screen, press back button to see the OSC messages on your other application</li>
+			
+				
+				</ol>
+					
+			<p>Address 127.0.0.1 <br>Port 5555 <br><br>
+			Set a different port by modifying oscBridge.js accordingly.</p>
+
+		</section>
+		<table id="outputTable">
+			<thead>
+				<tr>
+					<th>OSC</th>
+					<th>Event</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody id="tableOutput">
+				<tr onclick="document.getElementById('tapOscSend').click()" id="tapRow">
+					<td><input type="checkbox" id="tapOscSend" checked onclick="event.stopPropagation();"></td>
+					<td>Tap</td>
+					<td id="tapDetails">Tap your finger and thumb together to increment the count</td>
+				</tr>
+				<tr onclick="document.getElementById('rotaryOscSend').click()" id="rotaryRow">
+					<td><input type="checkbox" id="rotaryOscSend" checked onclick="event.stopPropagation();"></td>
+					<td>Rotary Step</td>
+					<td id="rotaryDetails">Rotate dial or crown to increment the count</td>
+					
+				</tr>
+				<tr onclick="document.getElementById('backButtonOscSend').click()"id="backRow">
+					<td><input type="checkbox" id="backButtonOscSend" checked onclick="event.stopPropagation();"></td>
+					<td>Back Button</td>
+					<td id="backButtonDetails">Press back button on your watch to increment the count</td>
+				</tr>
+				<tr onclick="document.getElementById('armDirectionChangedOscSend').click()" id="armDirectionRow">
+					<td><input type="checkbox" id="armDirectionChangedOscSend" onclick="event.stopPropagation();"></td>
+					<td>Arm Direction</td>
+					<td id="armDirectionChangedDetails"></td>
+				</tr>
+				<tr onclick="document.getElementById('accelerationChangedOscSend').click()" id="accelerationRow">
+					<td><input type="checkbox" id="accelerationChangedOscSend" onclick="event.stopPropagation();"></td>
+					<td>Acceleration</td>
+					<td id="accelerationChangedDetails"></td>
+				</tr>
+				<tr onclick="document.getElementById('angularVelocityChangedOscSend').click()" id="angularVelocityRow">
+					<td><input type="checkbox" id="angularVelocityChangedOscSend" onclick="event.stopPropagation();"></td>
+					<td>Angular Velocity</td>
+					<td id="angularVelocityChangedDetails"></td>
+				</tr>
+				<tr onclick="document.getElementById('gravityVectorChangedOscSend').click()" id="gravityVectorRow">
+					<td><input type="checkbox" id="gravityVectorChangedOscSend" onclick="event.stopPropagation();"></td>
+					<td>Gravity Vector</td>
+					<td id="gravityVectorChangedDetails"></td>
+				</tr>
+		
+			</tbody>
+		</table>
+		
+		<script>
+			
+			var osc = new OSC();
+			osc.open();
+			osc.on('open', () => {
+				console.log('Connected');
+			});
+
+			function shouldSendOscMessage(event) {
+				const checkbox = document.getElementById(`${event}OscSend`);
+				return checkbox && checkbox.checked;
+			}
+
+			const watch = new TouchSDK.Watch();
+			let buttonPressCount = 0;
+			let rotaryCount = 0;
+			let tapCount = 0;
+			let direction = 'none';
+
+			// get first <object>
+			const objTag = document.querySelector('object');
+
+			// wait for SVG to load
+			objTag.addEventListener('load', () => {
+
+			// reference to SVG document
+			const svg = objTag.getSVGDocument();
+			
+			});
+
+			let data = [
+				[], // Placeholder for the x-axis (time or sequence)
+				[],  // Placeholder for the y-axis (acceleration x-component)
+				[],  // Placeholder for the y-axis (acceleration y-component)
+				[],  // Placeholder for the y-axis (acceleration z-component)
+				[],  // Placeholder for the y-axis (angular velocity x-component)
+				[],  // Placeholder for the y-axis (angular velocity y-component)
+				[],  // Placeholder for the y-axis (angular velocity z-component)
+				[],  // Placeholder for the y-axis (gravity vector x-component)
+				[],  // Placeholder for the y-axis (gravity vector y-component)
+				[],  // Placeholder for the y-axis (gravity vector z-component)
+				[],  // Placeholder for the y-axis (arm orientation dx-component)
+				[]  // Placeholder for the y-axis (arm orientation dy-component)
+			];
+
+			const opts = {
+				width: 1380,
+				height: 300,
+				series: [
+					{},
+					{
+						label: "Acc X",
+						stroke: "orange",
+					},
+					{
+						label: "Acc Y",
+						stroke: "darkorange",
+					},
+					{
+						label: "Acc Z",
+						stroke: "yellow",
+					},
+					{
+						label: "AngVel X",
+						stroke: "blue",
+					},
+					{
+						label: "AngVel Y",
+						stroke: "darkblue",
+					},
+					{
+						label: "AngVel Z",
+						stroke: "lightblue",
+					},
+					{
+						label: "Grav X",
+						stroke: "green",
+					},
+					{
+						label: "Grav Y",
+						stroke: "darkgreen",
+					},
+					{
+						label: "Grav Z",
+						stroke: "lightgreen",
+					},
+					{
+						label: "Arm X",
+						stroke: "purple",
+					},
+					{
+						label: "Arm Y",
+						stroke: "pink",
+					}
+				],
+
+				scales: {
+					x: {
+						time: false,
+					},
+					y: {
+						range: [-15, 15], // Adjust based on expected acceleration range
+					},
+				},
+			};
+
+			let uplotChart = new uPlot(opts, data, document.getElementById('chart'));
+
+
+
+			// Update details in the table
+			function updateDetails(event, details) {
+			  const element = document.getElementById(`${event}Details`);
+			  if (element) {
+				element.textContent = details;
+			  } else {
+				console.error(`Element with id ${event}Details not found`);
+			  }
+			}
+			
+			// Handle requestConnection on button click
+			const connectButton = document.createElement('button');
+			connectButton.textContent = 'Connect';
+			connectButton.className = 'connect';
+			document.body.appendChild(connectButton);
+			
+			let reconnectButton = document.createElement('button');
+			reconnectButton.textContent = 'Reconnect';
+			reconnectButton.className = 'reconnect';
+			reconnectButton.style.display = 'none'; // Initially hidden
+			document.body.appendChild(reconnectButton);
+			
+			
+			
+
+			reconnectButton.addEventListener('click', () => {
+				handleReconnection();
+			});
+					
+
+			// Handle Reconnection on button click
+			async function handleReconnection() {
+				try {
+
+					await watch.disconnect();
+					resetDetails();
+					connectButton.style.display = 'inline';
+					reconnectButton.style.display = 'none';
+					document.querySelector('.reset').style.display = 'none';
+					setTimeout(() => {
+						 handleConnection(); 
+					}, 1000);					
+				} catch (error) {
+					console.error(error.message);
+				}
+			}
+
+			// Handle requestConnection on button click
+			async function handleConnection() {
+				try {
+					document.getElementById('loading').style.display = 'flex';
+					document.getElementById('loading').style.backdropFilter = 'blur(10px)';
+					document.getElementById('loading').style.opacity = '100';
+					document.getElementById('countDown').style.opacity = '0';
+					document.getElementById('countDown').textContent = '4';	
+					await watch.requestConnection();
+					document.getElementById('countDown').style.opacity = '100';
+					
+					connectButton.style.display = 'none';
+					document.querySelector('.reset').style.display = 'inline';
+					reconnectButton.style.display = 'inline';
+					startCountdown();
+				} catch (error) {
+					console.error(error.message);
+				}
+			}
+
+
+			function startCountdown() {
+						document.getElementById('countDown').textContent = '4';
+						setTimeout(() => {
+							document.getElementById('countDown').textContent = '3';
+							setTimeout(() => {
+								document.getElementById('countDown').textContent = '2';
+								document.getElementById('loading').style.transition = 'backdrop-filter 3s ease';
+								document.getElementById('loading').style.backdropFilter = 'blur(0px)';
+								setTimeout(() => {
+									document.getElementById('countDown').textContent = '1';
+									setTimeout(() => {
+										document.getElementById('countDown').style.transition = 'opacity 1s ease';
+										document.getElementById('countDown').style.opacity = '0';
+										document.getElementById('loading').style.transition = 'opacity 1s ease';
+										document.getElementById('loading').style.opacity = '0';
+										setTimeout(() => {
+											document.getElementById('countDown').textContent = '';										
+										document.getElementById('loading').style.display = 'none';	
+										}, 1000);							
+									}, 1000);
+								}, 1000);
+							}, 1000);
+						}, 1000);
+					}
+			
+			
+			// Attach event listener for connectButton
+			connectButton.addEventListener('click', handleConnection);
+
+			function resetDetails() {
+				const allDetailsCells = document.querySelectorAll('td[id$="Details"]');
+			  	allDetailsCells.forEach(cell => {
+					cell.textContent = '';
+			  	});
+				resetUPlotScriptAndValues();		
+			}
+
+
+			function resetUPlotScriptAndValues() {
+				// Reinitialize the data array with empty arrays for each series
+				data = [
+					[], // Placeholder for the x-axis (time or sequence)
+					[], // Placeholder for the y-axis (acceleration x-component)
+					[], // Placeholder for the y-axis (acceleration y-component)
+					[], // Placeholder for the y-axis (acceleration z-component)
+					[], // Placeholder for the y-axis (angular velocity x-component)
+					[], // Placeholder for the y-axis (angular velocity y-component)
+					[], // Placeholder for the y-axis (angular velocity z-component)
+					[], // Placeholder for the y-axis (gravity vector x-component)
+					[], // Placeholder for the y-axis (gravity vector y-component)
+					[], // Placeholder for the y-axis (gravity vector z-component)
+					[], // Placeholder for the y-axis (arm orientation dx-component)
+					[]  // Placeholder for the y-axis (arm orientation dy-component)
+				];
+
+				// Reset the uPlot chart with the newly initialized data array
+				uplotChart.setData(data);
+			}
+			
+			function changeBackgroundColor(id) {
+				setTimeout(() => {
+					document.getElementById(id).style.backgroundColor = '#434245';
+					setTimeout(() => {
+						document.getElementById(id).style.backgroundColor = '';
+					}, 100);
+				}, 0);
+			}
+			
+			watch.addEventListener('tap', () => {
+				tapCount++;
+				
+				if (shouldSendOscMessage('tap')) {
+					updateDetails('tap', `${tapCount}`);
+					osc.send(new OSC.Message('/tap', tapCount)); // Updated to send OSC message as a Message object
+				}
+				changeBackgroundColor('tapRow');				
+			});
+
+			watch.addEventListener('button', () => {
+				buttonPressCount++;
+				if (shouldSendOscMessage('backButton')) {
+					updateDetails('backButton', `${buttonPressCount}`);
+			  		osc.send(new OSC.Message('/back', buttonPressCount));
+			  	}
+				changeBackgroundColor('backRow');
+			});
+			
+			watch.addEventListener('rotary', (event) => {
+				const step = event.detail;				
+				if (step === -1) {
+					rotaryCount++;
+					direction = 'right';
+				} else {
+					rotaryCount--;
+					direction = 'left';
+				}
+				if (shouldSendOscMessage('rotary')) {
+					updateDetails('rotary', `${rotaryCount}, Direction: ${direction}, Step: ${step}`);
+					osc.send(new OSC.Message('/rotary', rotaryCount, direction, step));
+			  	}
+				changeBackgroundColor('rotaryRow');
+			});
+
+			watch.addEventListener('connectionstatuschanged', (event) => {
+				if (event.detail) {
+					const status = event.detail;
+					
+					
+					if (shouldSendOscMessage('connectionStatus')) {
+						updateDetails('connectionStatus', `Status: ${status}`);
+						osc.send(new OSC.Message('/status', status));
+					}
+				} else {
+					console.error('Event detail is null');
+				}
+			});
+
+			
+
+			watch.addEventListener('accelerationchanged', (event) => {
+				if (event.detail) {
+					const { x, y, z } = event.detail;
+					data[0].push(data[0].length);
+					data[1].push(x); // Update with the x-component of acceleration
+					data[2].push(y); // Update with the y-component of acceleration
+					data[3].push(z); // Update with the z-component of acceleration
+					uplotChart.setData(data);
+
+					if (shouldSendOscMessage('accelerationChanged')) {
+						updateDetails('accelerationChanged', `x: ${x}, y: ${y}, z: ${z}`);
+						osc.send(new OSC.Message('/acc',x, y, z));
+					}
+				}
+			});
+
+			watch.addEventListener('angularvelocitychanged', (event) => {
+				if (event.detail) {
+					const { x, y, z } = event.detail;
+					data[4].push(x); // Update with the x-component of angular velocity
+					data[5].push(y); // Update with the y-component of angular velocity
+					data[6].push(z); // Update with the z-component of angular velocity
+					uplotChart.setData(data);
+					if (shouldSendOscMessage('angularVelocityChanged')) {
+						updateDetails('angularVelocityChanged', `x: ${x}, y: ${y}, z: ${z}`);
+						osc.send(new OSC.Message('/angVel', x, y, z));
+					}
+				}
+			});
+
+			watch.addEventListener('gravityvectorchanged', (event) => {
+				if (event.detail) {
+					const { x, y, z } = event.detail;
+					data[7].push(x); // Update with the x-component of angular velocity
+					data[8].push(y); // Update with the y-component of angular velocity
+					data[9].push(z); // Update with the z-component of angular velocity
+					uplotChart.setData(data);
+					if (shouldSendOscMessage('gravityVectorChanged')) {
+						updateDetails('gravityVectorChanged', `x: ${x}, y: ${y}, z: ${z}`);
+						osc.send(new OSC.Message('/grav', x, y, z));
+					}
+				}
+			});
+
+			watch.addEventListener('armdirectionchanged', (event) => {
+				if (event.detail) {
+					const { dx, dy } = event.detail;
+					data[10].push(dx); // Update with the dx-component of arm direction
+					data[11].push(dy); // Update with the dy-component of arm direction
+				
+					uplotChart.setData(data);
+					if (shouldSendOscMessage('armDirectionChanged')) {
+						updateDetails('armDirectionChanged', `dx: ${dx}, dy: ${dy}`);
+						osc.send(new OSC.Message('/arm', dx, dy));
+					}
+				}
+			});
+
+
+			// watch.addEventListener('touch', (event) => {
+			// 	if (event.detail) {
+			// 		const { x, y } = event.detail;
+			// 		updateDetails('touchStart', `x: ${x}, y: ${y}`);
+			// 	
+			// 		osc.send(new OSC.Message('/touch', x, y));
+			// 	} else {
+			// 		console.error('Event detail is null');
+			// 	}
+			// });
+
+			// watch.addEventListener('touchend', (event) => {
+			// 	if (event.detail) {
+			// 		const { x, y } = event.detail;
+			// 		updateDetails('touchEnd', `x: ${x}, y: ${y}`);
+			// 	
+			// 		osc.send(new OSC.Message('/touchend', x, y));
+			// 	} else {
+			// 		console.error('Event detail is null');
+			// 	}
+			// });
+
+			// watch.addEventListener('touchmove', (event) => {
+			// 	if (event.detail) {
+			// 		const { x, y } = event.detail;
+			// 		updateDetails('touchMove', `x: ${x}, y: ${y}`);
+			// 	
+			// 		osc.send(new OSC.Message('/touchmove', x, y));
+			// 	} else {
+			// 		console.error('Event detail is null');
+			// 	}
+			// });
+
+			// watch.addEventListener('touchcancel', (event) => {
+			// 	if (event.detail) {
+			// 		const { x, y } = event.detail;
+			// 		updateDetails('touchCancel', `x: ${x}, y: ${y}`);
+			// 	
+			// 		osc.send(new OSC.Message('/touchcancle', x, y));
+			// 	} else {
+			// 		console.error('Event detail is null');
+			// 	}
+			// });
+
+			// watch.addEventListener('orientationchanged', (event) => {
+			// 	if (event.detail) {
+			// 		const { x, y, z, w } = event.detail;
+			// 		updateDetails('orientationChanged', `x: ${x}, y: ${y}, z: ${z}, w: ${w}`);
+			// 	
+			// 		osc.send(new OSC.Message('/ori', x, y, z, w));
+			// 	} else {
+			// 		console.error('Event detail is null');
+			// 	}
+			// });
+			
+			
+		</script>
+	</body>
+</html>
+
