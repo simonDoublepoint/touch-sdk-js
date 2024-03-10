@@ -3,7 +3,10 @@
     <head>
 		<title>Touch SDK OSC Sender</title>
         <script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.2/dist/main.js"></script>
-        <script src="../node_modules/osc-js/lib/osc.min.js"></script>
+		<link href="../src/css/fontawesome.min.css" rel="stylesheet" />
+		<link href="../src/css/regular.min.css" rel="stylesheet" />
+		<link href="../src/css/solid.min.css" rel="stylesheet" />
+		<script src="../node_modules/osc-js/lib/osc.min.js"></script>
 		<link rel="stylesheet" href="../node_modules/uplot/dist/uPlot.min.css">
 		<script src="../node_modules/uplot/dist/uPlot.iife.min.js"></script>
 		<link rel="stylesheet" href="../src/style.css">
@@ -25,17 +28,19 @@
 			<img src="../src/2pt_logo_train_light.png" />
 		  </object>
 		<div id="chart"></div>
-		<button class="reset" onclick="resetUPlotScriptAndValues()">Reset</button>
+		<button class="reset" onclick="resetUPlotScriptAndValues()"><i class="fas fa-redo"></i> Reset</button>
+		<button class="pausePlay" onclick="pausePlayPlot()"><i class="fas fa-pause"></i> Pause</button>
+		
 		<section class="intro" >	
 			<div>
 				<h1 style="color: #fff;">Touch SDK <br><span style="color: #0078d4; margin-top: 20px;">Monitor</span></h1>
 			
-				<h3>This example the realtime IMU data stream from a connected watch and how Touch SDK events are sent as OSC messages to other applications.</h3>
+				<h3>This example demonstrates the realtime IMU data stream from a connected watch and how Touch SDK events are sent as OSC messages to other applications. Get the files here. <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a></h3>
 					
 			</div>
 			
 				<ol>
-					<li>To send OSC messages ensure OSC-Bridge is operational by running <br> <code style="color: #0078d4;">node &lt;pathToOscBridge.js&gt;</code></li>
+					<li>To send OSC messages ensure OSC-Bridge is operational by running <br> <code style="color: #0078d4;">node &lt;pathToOscBridge.js&gt;</code>.</li>
 					<li>Refresh this page</li>
 					<li>Press Connect to pair Watch</li>
 					<li>Click on rows below to send only selected values</li>
@@ -205,7 +210,15 @@
 
 			let uplotChart = new uPlot(opts, data, document.getElementById('chart'));
 
-
+			let uPlotPaused = false;
+			function pausePlayPlot() {
+				uPlotPaused = !uPlotPaused;
+				if (uPlotPaused) {					
+					document.querySelector('.pausePlay').innerHTML = '<i class="fa-solid fa-play"></i> Play';
+				} else {					
+					document.querySelector('.pausePlay').innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+				}
+			}
 
 			// Update details in the table
 			function updateDetails(event, details) {
@@ -219,12 +232,12 @@
 			
 			// Handle requestConnection on button click
 			const connectButton = document.createElement('button');
-			connectButton.textContent = 'Connect';
+			connectButton.innerHTML = '<i class="fa-regular fa-watch"></i> Connect';
 			connectButton.className = 'connect';
 			document.body.appendChild(connectButton);
 			
 			let reconnectButton = document.createElement('button');
-			reconnectButton.textContent = 'Reconnect';
+			reconnectButton.innerHTML = '<i class="fa-regular fa-link-simple"></i> Reconnect';
 			reconnectButton.className = 'reconnect';
 			reconnectButton.style.display = 'none'; // Initially hidden
 			document.body.appendChild(reconnectButton);
@@ -243,9 +256,13 @@
 
 					await watch.disconnect();
 					resetDetails();
+					
+					document.querySelector('.reset').style.display = 'none';
+					document.querySelector('.pausePlay').style.display = 'inline';
+
 					connectButton.style.display = 'inline';
 					reconnectButton.style.display = 'none';
-					document.querySelector('.reset').style.display = 'none';
+
 					setTimeout(() => {
 						 handleConnection(); 
 					}, 1000);					
@@ -264,9 +281,11 @@
 					document.getElementById('countDown').textContent = '4';	
 					await watch.requestConnection();
 					document.getElementById('countDown').style.opacity = '100';
+
+					document.querySelector('.reset').style.display = 'inline';
+					document.querySelector('.pausePlay').style.display = 'inline';
 					
 					connectButton.style.display = 'none';
-					document.querySelector('.reset').style.display = 'inline';
 					reconnectButton.style.display = 'inline';
 					startCountdown();
 				} catch (error) {
@@ -401,12 +420,15 @@
 					data[1].push(x); // Update with the x-component of acceleration
 					data[2].push(y); // Update with the y-component of acceleration
 					data[3].push(z); // Update with the z-component of acceleration
-					uplotChart.setData(data);
+					
 
 					if (shouldSendOscMessage('accelerationChanged')) {
 						updateDetails('accelerationChanged', `x: ${x}, y: ${y}, z: ${z}`);
 						osc.send(new OSC.Message('/acc',x, y, z));
 					}
+
+					if (uPlotPaused) return;
+					uplotChart.setData(data);
 				}
 			});
 
@@ -416,11 +438,13 @@
 					data[4].push(x); // Update with the x-component of angular velocity
 					data[5].push(y); // Update with the y-component of angular velocity
 					data[6].push(z); // Update with the z-component of angular velocity
-					uplotChart.setData(data);
+				
 					if (shouldSendOscMessage('angularVelocityChanged')) {
 						updateDetails('angularVelocityChanged', `x: ${x}, y: ${y}, z: ${z}`);
 						osc.send(new OSC.Message('/angVel', x, y, z));
 					}
+					if (uPlotPaused) return;
+					uplotChart.setData(data);
 				}
 			});
 
@@ -430,11 +454,13 @@
 					data[7].push(x); // Update with the x-component of angular velocity
 					data[8].push(y); // Update with the y-component of angular velocity
 					data[9].push(z); // Update with the z-component of angular velocity
-					uplotChart.setData(data);
+
 					if (shouldSendOscMessage('gravityVectorChanged')) {
 						updateDetails('gravityVectorChanged', `x: ${x}, y: ${y}, z: ${z}`);
 						osc.send(new OSC.Message('/grav', x, y, z));
 					}
+					if (uPlotPaused) return;
+					uplotChart.setData(data);
 				}
 			});
 
@@ -444,72 +470,16 @@
 					data[10].push(dx); // Update with the dx-component of arm direction
 					data[11].push(dy); // Update with the dy-component of arm direction
 				
-					uplotChart.setData(data);
+	
 					if (shouldSendOscMessage('armDirectionChanged')) {
 						updateDetails('armDirectionChanged', `dx: ${dx}, dy: ${dy}`);
 						osc.send(new OSC.Message('/arm', dx, dy));
 					}
+					if (uPlotPaused) return;
+					uplotChart.setData(data);
 				}
 			});
-
-
-			// watch.addEventListener('touch', (event) => {
-			// 	if (event.detail) {
-			// 		const { x, y } = event.detail;
-			// 		updateDetails('touchStart', `x: ${x}, y: ${y}`);
-			// 	
-			// 		osc.send(new OSC.Message('/touch', x, y));
-			// 	} else {
-			// 		console.error('Event detail is null');
-			// 	}
-			// });
-
-			// watch.addEventListener('touchend', (event) => {
-			// 	if (event.detail) {
-			// 		const { x, y } = event.detail;
-			// 		updateDetails('touchEnd', `x: ${x}, y: ${y}`);
-			// 	
-			// 		osc.send(new OSC.Message('/touchend', x, y));
-			// 	} else {
-			// 		console.error('Event detail is null');
-			// 	}
-			// });
-
-			// watch.addEventListener('touchmove', (event) => {
-			// 	if (event.detail) {
-			// 		const { x, y } = event.detail;
-			// 		updateDetails('touchMove', `x: ${x}, y: ${y}`);
-			// 	
-			// 		osc.send(new OSC.Message('/touchmove', x, y));
-			// 	} else {
-			// 		console.error('Event detail is null');
-			// 	}
-			// });
-
-			// watch.addEventListener('touchcancel', (event) => {
-			// 	if (event.detail) {
-			// 		const { x, y } = event.detail;
-			// 		updateDetails('touchCancel', `x: ${x}, y: ${y}`);
-			// 	
-			// 		osc.send(new OSC.Message('/touchcancle', x, y));
-			// 	} else {
-			// 		console.error('Event detail is null');
-			// 	}
-			// });
-
-			// watch.addEventListener('orientationchanged', (event) => {
-			// 	if (event.detail) {
-			// 		const { x, y, z, w } = event.detail;
-			// 		updateDetails('orientationChanged', `x: ${x}, y: ${y}, z: ${z}, w: ${w}`);
-			// 	
-			// 		osc.send(new OSC.Message('/ori', x, y, z, w));
-			// 	} else {
-			// 		console.error('Event detail is null');
-			// 	}
-			// });
-			
 			
 		</script>
 	</body>
 </html>
-

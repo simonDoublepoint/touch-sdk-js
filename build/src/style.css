@@ -100,9 +100,10 @@ th:nth-child(3), td:nth-child(3) {
     fill: #fff;
 }
 /* Style for connection button */
-button.connect, button.reconnect, button.reset {
+button.connect, button.reconnect, button.reset, button.pausePlay {
     font-size: 16px;
     padding: 10px 20px;
+    width: 10em;
     margin: 2em auto;
     border: none;
     border-radius: 5px;
@@ -128,13 +129,20 @@ button.reconnect:hover {
 }
 
 button.reset {
-    right: 10em;
+    right: 13em;
+}
+
+button.pausePlay {
+    right: 24em;
+}
+
+button.reset, button.pausePlay {
     background-color: #414145; /* Blue */
     color: white;
     display: none;
-
 }
-button.reset:hover {
+
+button.reset:hover, button.pausePlay:hover {
     background-color: #37373b   ;
 }
 
