@@ -15,7 +15,7 @@ Works with Chrome-based browsers. ([more info](https://caniuse.com/?search=bluet
 Live example:
 https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html
 
-![Touch SDK Web Monitor - How to Connect](@@og-image.gif)
+![Touch SDK Web Monitor - How to Connect](https://playground.doublepoint.com/plot/src/images/og_image.gif)
 [Watch the Video](https://youtu.be/3sMWHl0PZDM)
 
 
