@@ -12,11 +12,11 @@ Works with Chrome-based browsers. ([more info](https://caniuse.com/?search=bluet
 
 ## Quick-Start 
 
-Live example:
-https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html
 
-![Touch SDK Web Monitor - How to Connect](https://playground.doublepoint.com/plot/src/images/og_image.gif)
-[Watch the Video](https://youtu.be/3sMWHl0PZDM)
+
+![Touch SDK Web Monitor - How to Connect](https://github.com/simonDoublepoint/touch-sdk-js/assets/103493347/070f6d01-00df-4cb6-aed0-e193d781b074)
+[Open Live Example](https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html)
+[Watch Intro Video](https://youtu.be/3sMWHl0PZDM)
 
 
 # Touch SDK Web Monitor - Quick Guide
