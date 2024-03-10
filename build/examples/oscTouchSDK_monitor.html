@@ -23,6 +23,23 @@
 		<meta name="msapplication-config" content="../src/favicon/browserconfig.xml">
 		<meta name="theme-color" content="#ffffff">
 
+
+		<meta property="og:type" content="video.movie" />
+		<meta property="og:title" content="Touch SDK Monitor by Doublepoint" />
+		<meta property="og:description" content="This example demonstrates the realtime IMU data stream from a connected watch and how Touch SDK events are sent as OSC messages to other applications." />
+		
+		<!-- For the image -->
+		<meta property="og:image" content="../src/images/og-image.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		
+		<!-- For the video -->
+		<meta property="og:video" content="../src/images/og-video.mp4" />
+		<meta property="og:video:type" content="video/mp4" />
+		<meta property="og:video:width" content="1280" />
+		<meta property="og:video:height" content="720" />
+
+
     </head>
     <body>
 		<div id="loading">
@@ -37,8 +54,8 @@
 		
 		</div>
 		
-		<object id="doublepointLogo" type="image/svg+xml" data="../src/2pt_logo_train_light.svg">
-			<img src="../src/2pt_logo_train_light.png" />
+		<object id="doublepointLogo" type="image/svg+xml" data="../src/images/2pt_logo_train_light.svg">
+			<img src="../src/images/2pt_logo_train_light.png" />
 		  </object>
 		<div id="chart"></div>
 		<button class="reset" onclick="resetUPlotScriptAndValues()"><i class="fa-regular fa-arrow-rotate-right"></i> Reset</button>
