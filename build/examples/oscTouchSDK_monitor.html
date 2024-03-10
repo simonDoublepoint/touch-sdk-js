@@ -27,13 +27,13 @@
     <body>
 		<div id="loading">
         	<h2>Connecting to your Watch... </h2>
-			<h3>If you encounter a low framerate, <a id="pressReconnect" onclick="handleReconnection()">press reconnect</a><br>
+			<h3><a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">Download</a> the zip or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone</a> the repo for best performance.<br>
 			
 
 
 			<h3 id="countDown">4</h3>
 			<br><br><br>
-			<h3><a onclick="document.getElementById('loading').style.display = 'none';">Close</a></h3>
+		<h3><a onclick="document.getElementById('loading').style.display = 'none';"><i class="fa-regular fa-times-circle"></i> Close</a></h3>
 		
 		</div>
 		
@@ -41,14 +41,14 @@
 			<img src="../src/2pt_logo_train_light.png" />
 		  </object>
 		<div id="chart"></div>
-		<button class="reset" onclick="resetUPlotScriptAndValues()"><i class="fas fa-redo"></i> Reset</button>
-		<button class="pausePlay" onclick="pausePlayPlot()"><i class="fas fa-pause"></i> Pause</button>
+		<button class="reset" onclick="resetUPlotScriptAndValues()"><i class="fa-regular fa-arrow-rotate-right"></i> Reset</button>
+		<button class="pausePlay" onclick="pausePlayPlot()"><i class="fa-solid fa-pause"></i> Pause</button>
 		
 		<section class="intro" >	
 			<div>
 				<h1 style="color: #fff;">Touch SDK <br><span style="color: #0078d4; margin-top: 20px;">Monitor</span></h1>
 			
-				<h3>This example demonstrates the realtime IMU data stream from a connected watch and how Touch SDK events are sent as OSC messages to other applications. Get the files here. <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a></h3>
+				<h3>This example demonstrates the realtime IMU data stream from a connected watch and how Touch SDK events are sent as OSC messages to other applications. Reconnect or pause if you experience low framerate. Download the files for best performance. <br> <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a></h3>
 					
 			</div>
 			
@@ -250,7 +250,7 @@
 			document.body.appendChild(connectButton);
 			
 			let reconnectButton = document.createElement('button');
-			reconnectButton.innerHTML = '<i class="fa-regular fa-link-simple"></i> Reconnect';
+			reconnectButton.innerHTML = '<i class="fa-regular fa-watch"></i> Reconnect';
 			reconnectButton.className = 'reconnect';
 			reconnectButton.style.display = 'none'; // Initially hidden
 			document.body.appendChild(reconnectButton);
@@ -271,7 +271,7 @@
 					resetDetails();
 					
 					document.querySelector('.reset').style.display = 'none';
-					document.querySelector('.pausePlay').style.display = 'inline';
+					document.querySelector('.pausePlay').style.display = 'none';
 
 					connectButton.style.display = 'inline';
 					reconnectButton.style.display = 'none';

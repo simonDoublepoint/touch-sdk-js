@@ -121,11 +121,11 @@ button.connect:hover {
     background-color: #45a049;
 }
 button.reconnect {
-    background-color: #f44336; /* Red */
+    background-color: #4CAF50; /* Red */
     color: white;
 }
 button.reconnect:hover {
-    background-color: #da190b;
+    background-color: #45a049;
 }
 
 button.reset {
@@ -143,7 +143,7 @@ button.reset, button.pausePlay {
 }
 
 button.reset:hover, button.pausePlay:hover {
-    background-color: #37373b   ;
+    background-color: #28282b   ;
 }
 
 /* Fixed height for connection status row */
