@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<title>Touch SDK Monitor</title>
         <script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.2/dist/main.js"></script>
 		<script src="../node_modules/osc-js/lib/osc.min.js"></script>
 		<link rel="stylesheet" href="../node_modules/uplot/dist/uPlot.min.css">
@@ -24,21 +23,29 @@
 		<meta name="theme-color" content="#ffffff">
 
 
-		<meta property="og:type" content="video.movie" />
-		<meta property="og:title" content="Touch SDK Monitor by Doublepoint" />
-		<meta property="og:description" content="This example demonstrates the realtime IMU data stream from a connected watch and how Touch SDK events are sent as OSC messages to other applications." />
-		
-		<!-- For the image -->
-		<meta property="og:image" content="../src/images/og-image.png" />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
-		
+		<!-- HTML Meta Tags -->
+		<title>Touch SDK Monitor by Doublepoint</title>
+		<meta name="description" content="Receive smartwatch IMU data stream and touch events through chrome browser and send it via OSC to programs such as MaxMSP or Touchdesigner.">
+
+		<!-- Facebook Meta Tags -->
+		<meta property="og:url" content="https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="Touch SDK Monitor by Doublepoint">
+		<meta property="og:description" content="Receive smartwatch IMU data stream and touch events through chrome browser and send it via OSC to programs such as MaxMSP or Touchdesigner.">
+		<meta property="og:image" content="https://playground.doublepoint.com/plot/src/images/og-image.png">
 		<!-- For the video -->
-		<meta property="og:video" content="../src/images/og-video.mp4" />
+		<meta property="og:video" content="https://playground.doublepoint.com/plot/src/images/og-video.mp4" />
 		<meta property="og:video:type" content="video/mp4" />
 		<meta property="og:video:width" content="1280" />
 		<meta property="og:video:height" content="720" />
 
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta property="twitter:domain" content="playground.doublepoint.com">
+		<meta property="twitter:url" content="https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html">
+		<meta name="twitter:title" content="Touch SDK Monitor by Doublepoint">
+		<meta name="twitter:description" content="Receive smartwatch IMU data stream and touch events through chrome browser and send it via OSC to programs such as MaxMSP or Touchdesigner.">
+		<meta name="twitter:image" content="https://playground.doublepoint.com/plot/src/images/og-image.png">
 
     </head>
     <body>
@@ -65,7 +72,7 @@
 			<div>
 				<h1 style="color: #fff;">Touch SDK <br><span style="color: #0078d4; margin-top: 20px;">Monitor</span></h1>
 			
-				<h3>This example demonstrates the realtime IMU data stream from a connected watch and how Touch SDK events are sent as OSC messages to other applications. Reconnect or pause if you experience low framerate. Download the files for best performance. <br> <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a></h3>
+				<h3>Receive smartwatch IMU data stream and touch events through any WebBLE browser and send it via OSC to programs such as MaxMSP or Touchdesigner. Reconnect or pause if you experience low framerate. Download the files for best performance. <br> <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a></h3>
 					
 			</div>
 			
