@@ -11,6 +11,8 @@
 		<link href="../src/css/solid.min.css" rel="stylesheet" />
 		
 		<link rel="stylesheet" href="../src/style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
 
 		<link rel="apple-touch-icon" sizes="180x180" href="../src/favicon/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="../src/favicon/favicon-32x32.png">
@@ -64,7 +66,9 @@
 		<object id="doublepointLogo" type="image/svg+xml" data="../src/images/2pt_logo_train_light.svg">
 			<img src="../src/images/2pt_logo_train_light.png" />
 		  </object>
-		<div id="chart"></div>
+		<div id="chartContainer">
+			<div id="chart"></div>
+		</div>
 		<button class="reset" onclick="resetUPlotScriptAndValues()"><i class="fa-regular fa-arrow-rotate-right"></i> Reset</button>
 		<button class="pausePlay" onclick="pausePlayPlot()"><i class="fa-solid fa-pause"></i> Pause</button>
 		
