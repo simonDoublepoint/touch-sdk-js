@@ -22,7 +22,18 @@ export class Watch extends EventTarget {
     constructor() {
         super()
         this._accepted = false
+
         this._hand = handedness[0]
+
+        this._hapticsAvailable = false
+        this._touchScreenResolution = {width: 0, height: 0}
+        this._batteryPercentage = -1
+
+        this._appId = ''
+        this._appVersion = ''
+        this._manufacturer = ''
+        this._deviceName = ''
+        this._modelInfo = ''
     }
 
     createConnectButton = () => {
@@ -143,14 +154,7 @@ export class Watch extends EventTarget {
         }
 
         if (message.info) {
-            const handRaw = message.info.hand
-            if (handRaw > 0 && handRaw < handedness.length) {
-                const hand = handedness[handRaw]
-                this._hand = hand
-                this.dispatchEvent(
-                    new CustomEvent('handednesschanged', {detail: hand})
-                )
-            }
+            this._parseInfo(message.info)
         }
 
         if (message.signals.includes(1)) {
@@ -185,20 +189,63 @@ export class Watch extends EventTarget {
                 characteristic.writeValueWithResponse(dataView)
             })
         })
-
     }
 
+    _parseInfo = (info) => {
+
+        const handRaw = info.hand
+
+        if (handRaw >= 0 && handRaw < handedness.length) {
+            const hand = handedness[handRaw]
+            if (hand !== this.hand) {
+                this._hand = hand
+                this.dispatchEvent(
+                    new CustomEvent('handednesschanged', {detail: hand})
+                )
+            }
+        }
+
+        if (info.hapticsAvailable) {
+            this._hapticsAvailable = true
+        }
+
+        if (info.touchScreenResolution && info.touchScreenResolution.x > 0 && info.touchScreenResolution.y > 0) {
+            this._touchScreenResolution = {width: info.touchScreenResolution.x, height: info.touchScreenResolution.y}
+        }
+
+        if (info.batteryPercentage > 0 && info.batteryPercentage <= 100) {
+            this._batteryPercentage = info.batteryPercentage
+        }
+
+        if (info.appId) {
+            this._appId = info.appId
+        }
+
+        if (info.appVersion) {
+            this._appVersion = info.appVersion
+        }
+
+        if (info.manufacturer) {
+            this._manufacturer = info.manufacturer
+        }
+
+        if (info.deviceName) {
+            this._deviceName = info.deviceName
+        }
+
+        if (info.modelInfo) {
+            this._modelInfo = info.modelInfo
+        }
+    }
 
     _fetchInfo = () => {
         this.gattServer.getPrimaryService(serviceUuids.PROTOBUF).then(service => {
             service.getCharacteristic(characteristicUuids.PROTOBUF_OUTPUT).then(characteristic => {
                 characteristic.readValue().then(data => {
                     const uints = new Uint8Array(data.buffer)
-                    const handRaw = Update.decode(uints).info.hand
-
-                    if (handRaw >= 0 && handRaw < handedness.length) {
-                        this._hand = handedness[handRaw]
-                    }
+                    const info = Update.decode(uints).info
+                    this._parseInfo(info)
+                    this.dispatchEvent(new CustomEvent('connected'))
                 })
             })
         })
@@ -265,4 +312,13 @@ export class Watch extends EventTarget {
     get device() { return this._device }
     get gattServer() { return this._gattServer }
     get hand() { return this._hand }
+    get hapticsAvailable() { return this._hapticsAvailable }
+    get touchScreenResolution() { return this._touchScreenResolution }
+    get batteryPercentage() { return this._batteryPercentage }
+    get appId() { return this._appId }
+    get appVersion() { return this._appVersion }
+    get manufacturer() { return this._manufacturer }
+    get deviceName() { return this._deviceName }
+    get modelInfo() { return this._modelInfo }
+
 }
