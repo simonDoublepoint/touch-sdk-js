@@ -124,6 +124,16 @@ export class Watch extends EventTarget {
             }
         }
 
+        for (const prob of message.probabilities) {
+            let gestureProb = 0
+            if (prob.label === 1) {
+                gestureProb = prob.probability
+            } else if (prob.label === 0) {
+                gestureProb = 1 - prob.probability
+            }
+            this.dispatchEvent(new CustomEvent('probability', {detail: gestureProb}))
+        }
+
         for (const rotaryEvent of message.rotaryEvents) {
             this.dispatchEvent(new CustomEvent('rotary', {detail: rotaryEvent.step}))
         }
