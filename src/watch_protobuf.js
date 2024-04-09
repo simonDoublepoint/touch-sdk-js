@@ -2752,7 +2752,7 @@
          * Properties of a Gesture.
          * @exports IGesture
          * @interface IGesture
-         * @property {Gesture.GestureType|null} [type] Gesture type
+         * @property {GestureType|null} [type] Gesture type
          * @property {number|null} [deltaTime] Gesture deltaTime
          */
     
@@ -2773,7 +2773,7 @@
     
         /**
          * Gesture type.
-         * @member {Gesture.GestureType} type
+         * @member {GestureType} type
          * @memberof Gesture
          * @instance
          */
@@ -2900,6 +2900,7 @@
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     break;
                 }
             if (message.deltaTime != null && message.hasOwnProperty("deltaTime"))
@@ -2943,6 +2944,10 @@
             case 3:
                 message.type = 3;
                 break;
+            case "PINCH_HOLD":
+            case 4:
+                message.type = 4;
+                break;
             }
             if (object.deltaTime != null)
                 message.deltaTime = object.deltaTime | 0;
@@ -2967,7 +2972,7 @@
                 object.deltaTime = 0;
             }
             if (message.type != null && message.hasOwnProperty("type"))
-                object.type = options.enums === String ? $root.Gesture.GestureType[message.type] === undefined ? message.type : $root.Gesture.GestureType[message.type] : message.type;
+                object.type = options.enums === String ? $root.GestureType[message.type] === undefined ? message.type : $root.GestureType[message.type] : message.type;
             if (message.deltaTime != null && message.hasOwnProperty("deltaTime"))
                 object.deltaTime = message.deltaTime;
             return object;
@@ -2998,24 +3003,6 @@
             }
             return typeUrlPrefix + "/Gesture";
         };
-    
-        /**
-         * GestureType enum.
-         * @name Gesture.GestureType
-         * @enum {number}
-         * @property {number} NONE=0 NONE value
-         * @property {number} PINCH_TAP=1 PINCH_TAP value
-         * @property {number} CLENCH=2 CLENCH value
-         * @property {number} SURFACE_TAP=3 SURFACE_TAP value
-         */
-        Gesture.GestureType = (function() {
-            var valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[0] = "NONE"] = 0;
-            values[valuesById[1] = "PINCH_TAP"] = 1;
-            values[valuesById[2] = "CLENCH"] = 2;
-            values[valuesById[3] = "SURFACE_TAP"] = 3;
-            return values;
-        })();
     
         return Gesture;
     })();
@@ -3877,7 +3864,7 @@
          * Properties of a ProbabilityEntry.
          * @exports IProbabilityEntry
          * @interface IProbabilityEntry
-         * @property {Gesture.GestureType|null} [label] ProbabilityEntry label
+         * @property {GestureType|null} [label] ProbabilityEntry label
          * @property {number|null} [probability] ProbabilityEntry probability
          */
     
@@ -3898,7 +3885,7 @@
     
         /**
          * ProbabilityEntry label.
-         * @member {Gesture.GestureType} label
+         * @member {GestureType} label
          * @memberof ProbabilityEntry
          * @instance
          */
@@ -4025,6 +4012,7 @@
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     break;
                 }
             if (message.probability != null && message.hasOwnProperty("probability"))
@@ -4068,6 +4056,10 @@
             case 3:
                 message.label = 3;
                 break;
+            case "PINCH_HOLD":
+            case 4:
+                message.label = 4;
+                break;
             }
             if (object.probability != null)
                 message.probability = Number(object.probability);
@@ -4092,7 +4084,7 @@
                 object.probability = 0;
             }
             if (message.label != null && message.hasOwnProperty("label"))
-                object.label = options.enums === String ? $root.Gesture.GestureType[message.label] === undefined ? message.label : $root.Gesture.GestureType[message.label] : message.label;
+                object.label = options.enums === String ? $root.GestureType[message.label] === undefined ? message.label : $root.GestureType[message.label] : message.label;
             if (message.probability != null && message.hasOwnProperty("probability"))
                 object.probability = options.json && !isFinite(message.probability) ? String(message.probability) : message.probability;
             return object;
