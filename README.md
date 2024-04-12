@@ -13,7 +13,7 @@ Works with Chrome-based browsers. ([more info](https://caniuse.com/?search=bluet
 ## Importing (URL)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.2/dist/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.6.0/dist/main.js"></script>
 ```
 
 ```javascript
