@@ -86,6 +86,11 @@ watch.requestConnection().then(() => {
 watch.addEventListener('tap', (event) => {
     console.log('tap')
 })
+
+```javascript
+watch.addEventListener('probability', (event) => {
+    console.log("gesture probability:", event.detail)
+})
 ```
 
 #### Ray casting (arm direction)
@@ -182,6 +187,17 @@ In Wear OS this is the back button. Only clicks are registered, no button down a
 ```javascript
 watch.addEventListener('button', (event) => {
     console.log('button')
+})
+```
+
+#### Miscellaneous
+After the `connected` event, several watch properties become available.
+```javascript
+watch.addEventListener('connected', (event) => {
+    watch.hand // 'left' or 'right'
+    watch.hapticsAvailable // true or false
+    watch.touchScreenResolution // (width, height). (0, 0) if no touch screen
+    watch.batteryPercentage // 0-100
 })
 ```
 
