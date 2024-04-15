@@ -123,19 +123,19 @@ export class Watch extends EventTarget {
                 this.dispatchEvent(new CustomEvent('tap'))
             }
         }
-
+    
         for (const prob of message.probabilities) {
-            let gestureProb = 0
-            } if (prob.label === 0) {
-                gestureProb = 1 - prob.probability
+            let gestureProb = 0;
+            if (prob.label === 0) {
+                gestureProb = 1 - prob.probability;
             } else {
-                gestureProb = prob.probability
+                gestureProb = prob.probability;
             }
-            this.dispatchEvent(new CustomEvent('probability', {detail: gestureProb}))
+            this.dispatchEvent(new CustomEvent('probability', {detail: gestureProb}));
         }
-
+    
         for (const rotaryEvent of message.rotaryEvents) {
-            this.dispatchEvent(new CustomEvent('rotary', {detail: rotaryEvent.step}))
+            this.dispatchEvent(new CustomEvent('rotary', {detail: rotaryEvent.step}));
         }
 
         for (const touchEvent of message.touchEvents) {
