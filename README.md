@@ -6,59 +6,14 @@
 ![npm downloads](https://img.shields.io/npm/dm/touch-sdk)
 ![Discord](https://img.shields.io/discord/869474617729875998)
 
-Connects to Doublepoint Touch SDK compatible Bluetooth devices – like [WowMouse app](https://play.google.com/store/apps/details?id=io.port6.watchbridge).
+Connects to Doublepoint Touch SDK compatible Bluetooth devices – like [this WearOS app](https://play.google.com/store/apps/details?id=io.port6.watchbridge).
 
 Works with Chrome-based browsers. ([more info](https://caniuse.com/?search=bluetooth))
-
-## Quick-Start 
-
-
-
-![Touch SDK Web Monitor - How to Connect](https://github.com/simonDoublepoint/touch-sdk-js/assets/103493347/070f6d01-00df-4cb6-aed0-e193d781b074)
-[Open Live Example](https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html)
-
-[Watch Intro Video](https://youtu.be/bfhU7M1Y2ZU)
-
-
-# Touch SDK Web Monitor - Quick Guide
-
-Easily integrate smartwatch IMU data and touch events into your projects with Touch SDK Web. This guide will help you set up your environment to start receiving data through WebBLE browsers and sending it via OSC to your favorite programs like MaxMSP or Touchdesigner.
-
-## Features
-- **OSC Bridge Included:** Seamlessly send data to any OSC-supported tool within your local network, opening new avenues for music, art performance, and interaction research without the need for coding expertise.
-
-## Getting Started
-**Live Demo:** Experience the capabilities by trying out our [OSC TouchSDK Monitor](https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html).
-
-### Setup Your Watch
-1. **Download WowMouse:** Get it for your wearOS watch from [Google Play](https://play.google.com/store/apps/details?id=io.port6.watchbridge).
-2. **Activate TouchSDK Mode:** Navigate to `WowMouse > Settings > Turn on TouchSDK Mode`.
-
-### Setup Your Desktop
-1. **Get the SDK:** Download ZIP or clone the repo from [GitHub](https://github.com/simonDoublepoint/touch-sdk-js.git).
-2. **Install Dependencies:** Open a terminal, navigate to the `touch-sdk-js` folder, and run `npm install`.
-3. **Launch OSC Bridge:**
-   - **Mac:** Open `touch-sdk-js/examples/oscTouchSDK_bridge.sh`.
-   - **Windows:** Open `touch-sdk-js/examples/oscTouchSDK_bridge.bat`.
-4. **Monitor Setup:** Open `touch-sdk-js/examples/oscTouchSDK_monitor.html` in Chrome.
-5. **Connect Your Watch:** Press connect and select your watch.
-6. **Configure Events:** Choose which events to send as OSC messages.
-7. **Receive Data:** Open any OSC-supported application and receive the data stream at `localhost port: 5555`.
-
-## Support
-Questions? Join our [Discord](https://discord.doublepoint.com/) and ask in the #QnA or #support-touchsdk channels.
-
-## Learn More
-- [About OSC](https://controlmedia.art/more-on-osc/)
-- [TouchSDK & WowMouse Documentation](https://docs.doublepoint.com/)
-
-
-# Touch SDK Web
 
 ## Importing (URL)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.2/dist/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.6.0/dist/main.js"></script>
 ```
 
 ```javascript
@@ -96,6 +51,9 @@ import { Watch } from 'touch-sdk'
     </body>
 </html>
 ```
+### More examples
+- [TouchSDK Output](examples/touchsdk_output_example.html) - all outputs of TouchSDK in a table format
+![TouchSDK Output Values](examples/touchsdk_output_values.jpg)
 
 ## Reference
 
@@ -130,6 +88,11 @@ watch.requestConnection().then(() => {
 ```javascript
 watch.addEventListener('tap', (event) => {
     console.log('tap')
+})
+
+```javascript
+watch.addEventListener('probability', (event) => {
+    console.log("gesture probability:", event.detail)
 })
 ```
 
@@ -227,6 +190,17 @@ In Wear OS this is the back button. Only clicks are registered, no button down a
 ```javascript
 watch.addEventListener('button', (event) => {
     console.log('button')
+})
+```
+
+#### Miscellaneous
+After the `connected` event, several watch properties become available.
+```javascript
+watch.addEventListener('connected', (event) => {
+    watch.hand // 'left' or 'right'
+    watch.hapticsAvailable // true or false
+    watch.touchScreenResolution // (width, height). (0, 0) if no touch screen
+    watch.batteryPercentage // 0-100
 })
 ```
 

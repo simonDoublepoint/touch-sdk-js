@@ -56,6 +56,10 @@ osc.on('/touchcancel', (message) => {
   console.log(`Touch Cancel: ${message.args}`);
 });
 
+osc.on('/prob', (message) => {
+  console.log(`Probability: ${message.args}`);
+});
+
 osc.open();
 
 process.on('SIGINT', () => {

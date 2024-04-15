@@ -16,6 +16,1858 @@
     // Exported root namespace
     var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
     
+    $root.HapticEvent = (function() {
+    
+        /**
+         * Properties of a HapticEvent.
+         * @exports IHapticEvent
+         * @interface IHapticEvent
+         * @property {HapticEvent.HapticType|null} [type] HapticEvent type
+         * @property {number|null} [intensity] HapticEvent intensity
+         * @property {number|null} [length] HapticEvent length
+         */
+    
+        /**
+         * Constructs a new HapticEvent.
+         * @exports HapticEvent
+         * @classdesc Represents a HapticEvent.
+         * @implements IHapticEvent
+         * @constructor
+         * @param {IHapticEvent=} [properties] Properties to set
+         */
+        function HapticEvent(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * HapticEvent type.
+         * @member {HapticEvent.HapticType} type
+         * @memberof HapticEvent
+         * @instance
+         */
+        HapticEvent.prototype.type = 0;
+    
+        /**
+         * HapticEvent intensity.
+         * @member {number} intensity
+         * @memberof HapticEvent
+         * @instance
+         */
+        HapticEvent.prototype.intensity = 0;
+    
+        /**
+         * HapticEvent length.
+         * @member {number} length
+         * @memberof HapticEvent
+         * @instance
+         */
+        HapticEvent.prototype.length = 0;
+    
+        /**
+         * Creates a new HapticEvent instance using the specified properties.
+         * @function create
+         * @memberof HapticEvent
+         * @static
+         * @param {IHapticEvent=} [properties] Properties to set
+         * @returns {HapticEvent} HapticEvent instance
+         */
+        HapticEvent.create = function create(properties) {
+            return new HapticEvent(properties);
+        };
+    
+        /**
+         * Encodes the specified HapticEvent message. Does not implicitly {@link HapticEvent.verify|verify} messages.
+         * @function encode
+         * @memberof HapticEvent
+         * @static
+         * @param {IHapticEvent} message HapticEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HapticEvent.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+            if (message.intensity != null && Object.hasOwnProperty.call(message, "intensity"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.intensity);
+            if (message.length != null && Object.hasOwnProperty.call(message, "length"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.length);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified HapticEvent message, length delimited. Does not implicitly {@link HapticEvent.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof HapticEvent
+         * @static
+         * @param {IHapticEvent} message HapticEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HapticEvent.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a HapticEvent message from the specified reader or buffer.
+         * @function decode
+         * @memberof HapticEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {HapticEvent} HapticEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        HapticEvent.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HapticEvent();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.type = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.intensity = reader.float();
+                        break;
+                    }
+                case 3: {
+                        message.length = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a HapticEvent message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof HapticEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {HapticEvent} HapticEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        HapticEvent.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a HapticEvent message.
+         * @function verify
+         * @memberof HapticEvent
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        HapticEvent.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.type != null && message.hasOwnProperty("type"))
+                switch (message.type) {
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                    break;
+                }
+            if (message.intensity != null && message.hasOwnProperty("intensity"))
+                if (typeof message.intensity !== "number")
+                    return "intensity: number expected";
+            if (message.length != null && message.hasOwnProperty("length"))
+                if (!$util.isInteger(message.length))
+                    return "length: integer expected";
+            return null;
+        };
+    
+        /**
+         * Creates a HapticEvent message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof HapticEvent
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {HapticEvent} HapticEvent
+         */
+        HapticEvent.fromObject = function fromObject(object) {
+            if (object instanceof $root.HapticEvent)
+                return object;
+            var message = new $root.HapticEvent();
+            switch (object.type) {
+            default:
+                if (typeof object.type === "number") {
+                    message.type = object.type;
+                    break;
+                }
+                break;
+            case "CANCEL":
+            case 0:
+                message.type = 0;
+                break;
+            case "ONESHOT":
+            case 1:
+                message.type = 1;
+                break;
+            }
+            if (object.intensity != null)
+                message.intensity = Number(object.intensity);
+            if (object.length != null)
+                message.length = object.length | 0;
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a HapticEvent message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof HapticEvent
+         * @static
+         * @param {HapticEvent} message HapticEvent
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        HapticEvent.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.type = options.enums === String ? "CANCEL" : 0;
+                object.intensity = 0;
+                object.length = 0;
+            }
+            if (message.type != null && message.hasOwnProperty("type"))
+                object.type = options.enums === String ? $root.HapticEvent.HapticType[message.type] === undefined ? message.type : $root.HapticEvent.HapticType[message.type] : message.type;
+            if (message.intensity != null && message.hasOwnProperty("intensity"))
+                object.intensity = options.json && !isFinite(message.intensity) ? String(message.intensity) : message.intensity;
+            if (message.length != null && message.hasOwnProperty("length"))
+                object.length = message.length;
+            return object;
+        };
+    
+        /**
+         * Converts this HapticEvent to JSON.
+         * @function toJSON
+         * @memberof HapticEvent
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        HapticEvent.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Gets the default type url for HapticEvent
+         * @function getTypeUrl
+         * @memberof HapticEvent
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        HapticEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HapticEvent";
+        };
+    
+        /**
+         * HapticType enum.
+         * @name HapticEvent.HapticType
+         * @enum {number}
+         * @property {number} CANCEL=0 CANCEL value
+         * @property {number} ONESHOT=1 ONESHOT value
+         */
+        HapticEvent.HapticType = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "CANCEL"] = 0;
+            values[valuesById[1] = "ONESHOT"] = 1;
+            return values;
+        })();
+    
+        return HapticEvent;
+    })();
+    
+    $root.ClientInfo = (function() {
+    
+        /**
+         * Properties of a ClientInfo.
+         * @exports IClientInfo
+         * @interface IClientInfo
+         * @property {string|null} [appName] ClientInfo appName
+         * @property {string|null} [deviceName] ClientInfo deviceName
+         * @property {string|null} [title] ClientInfo title
+         * @property {string|null} [os] ClientInfo os
+         */
+    
+        /**
+         * Constructs a new ClientInfo.
+         * @exports ClientInfo
+         * @classdesc Represents a ClientInfo.
+         * @implements IClientInfo
+         * @constructor
+         * @param {IClientInfo=} [properties] Properties to set
+         */
+        function ClientInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * ClientInfo appName.
+         * @member {string} appName
+         * @memberof ClientInfo
+         * @instance
+         */
+        ClientInfo.prototype.appName = "";
+    
+        /**
+         * ClientInfo deviceName.
+         * @member {string} deviceName
+         * @memberof ClientInfo
+         * @instance
+         */
+        ClientInfo.prototype.deviceName = "";
+    
+        /**
+         * ClientInfo title.
+         * @member {string} title
+         * @memberof ClientInfo
+         * @instance
+         */
+        ClientInfo.prototype.title = "";
+    
+        /**
+         * ClientInfo os.
+         * @member {string} os
+         * @memberof ClientInfo
+         * @instance
+         */
+        ClientInfo.prototype.os = "";
+    
+        /**
+         * Creates a new ClientInfo instance using the specified properties.
+         * @function create
+         * @memberof ClientInfo
+         * @static
+         * @param {IClientInfo=} [properties] Properties to set
+         * @returns {ClientInfo} ClientInfo instance
+         */
+        ClientInfo.create = function create(properties) {
+            return new ClientInfo(properties);
+        };
+    
+        /**
+         * Encodes the specified ClientInfo message. Does not implicitly {@link ClientInfo.verify|verify} messages.
+         * @function encode
+         * @memberof ClientInfo
+         * @static
+         * @param {IClientInfo} message ClientInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ClientInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.appName != null && Object.hasOwnProperty.call(message, "appName"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.appName);
+            if (message.deviceName != null && Object.hasOwnProperty.call(message, "deviceName"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deviceName);
+            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
+            if (message.os != null && Object.hasOwnProperty.call(message, "os"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.os);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified ClientInfo message, length delimited. Does not implicitly {@link ClientInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof ClientInfo
+         * @static
+         * @param {IClientInfo} message ClientInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ClientInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a ClientInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof ClientInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {ClientInfo} ClientInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ClientInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ClientInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.appName = reader.string();
+                        break;
+                    }
+                case 2: {
+                        message.deviceName = reader.string();
+                        break;
+                    }
+                case 3: {
+                        message.title = reader.string();
+                        break;
+                    }
+                case 4: {
+                        message.os = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a ClientInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof ClientInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {ClientInfo} ClientInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ClientInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a ClientInfo message.
+         * @function verify
+         * @memberof ClientInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ClientInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.appName != null && message.hasOwnProperty("appName"))
+                if (!$util.isString(message.appName))
+                    return "appName: string expected";
+            if (message.deviceName != null && message.hasOwnProperty("deviceName"))
+                if (!$util.isString(message.deviceName))
+                    return "deviceName: string expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.os != null && message.hasOwnProperty("os"))
+                if (!$util.isString(message.os))
+                    return "os: string expected";
+            return null;
+        };
+    
+        /**
+         * Creates a ClientInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof ClientInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {ClientInfo} ClientInfo
+         */
+        ClientInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.ClientInfo)
+                return object;
+            var message = new $root.ClientInfo();
+            if (object.appName != null)
+                message.appName = String(object.appName);
+            if (object.deviceName != null)
+                message.deviceName = String(object.deviceName);
+            if (object.title != null)
+                message.title = String(object.title);
+            if (object.os != null)
+                message.os = String(object.os);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a ClientInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof ClientInfo
+         * @static
+         * @param {ClientInfo} message ClientInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ClientInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.appName = "";
+                object.deviceName = "";
+                object.title = "";
+                object.os = "";
+            }
+            if (message.appName != null && message.hasOwnProperty("appName"))
+                object.appName = message.appName;
+            if (message.deviceName != null && message.hasOwnProperty("deviceName"))
+                object.deviceName = message.deviceName;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.os != null && message.hasOwnProperty("os"))
+                object.os = message.os;
+            return object;
+        };
+    
+        /**
+         * Converts this ClientInfo to JSON.
+         * @function toJSON
+         * @memberof ClientInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ClientInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Gets the default type url for ClientInfo
+         * @function getTypeUrl
+         * @memberof ClientInfo
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ClientInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/ClientInfo";
+        };
+    
+        return ClientInfo;
+    })();
+    
+    $root.InputUpdate = (function() {
+    
+        /**
+         * Properties of an InputUpdate.
+         * @exports IInputUpdate
+         * @interface IInputUpdate
+         * @property {IHapticEvent|null} [hapticEvent] InputUpdate hapticEvent
+         * @property {IClientInfo|null} [clientInfo] InputUpdate clientInfo
+         * @property {IModel|null} [modelRequest] InputUpdate modelRequest
+         */
+    
+        /**
+         * Constructs a new InputUpdate.
+         * @exports InputUpdate
+         * @classdesc Represents an InputUpdate.
+         * @implements IInputUpdate
+         * @constructor
+         * @param {IInputUpdate=} [properties] Properties to set
+         */
+        function InputUpdate(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * InputUpdate hapticEvent.
+         * @member {IHapticEvent|null|undefined} hapticEvent
+         * @memberof InputUpdate
+         * @instance
+         */
+        InputUpdate.prototype.hapticEvent = null;
+    
+        /**
+         * InputUpdate clientInfo.
+         * @member {IClientInfo|null|undefined} clientInfo
+         * @memberof InputUpdate
+         * @instance
+         */
+        InputUpdate.prototype.clientInfo = null;
+    
+        /**
+         * InputUpdate modelRequest.
+         * @member {IModel|null|undefined} modelRequest
+         * @memberof InputUpdate
+         * @instance
+         */
+        InputUpdate.prototype.modelRequest = null;
+    
+        /**
+         * Creates a new InputUpdate instance using the specified properties.
+         * @function create
+         * @memberof InputUpdate
+         * @static
+         * @param {IInputUpdate=} [properties] Properties to set
+         * @returns {InputUpdate} InputUpdate instance
+         */
+        InputUpdate.create = function create(properties) {
+            return new InputUpdate(properties);
+        };
+    
+        /**
+         * Encodes the specified InputUpdate message. Does not implicitly {@link InputUpdate.verify|verify} messages.
+         * @function encode
+         * @memberof InputUpdate
+         * @static
+         * @param {IInputUpdate} message InputUpdate message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        InputUpdate.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.hapticEvent != null && Object.hasOwnProperty.call(message, "hapticEvent"))
+                $root.HapticEvent.encode(message.hapticEvent, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.clientInfo != null && Object.hasOwnProperty.call(message, "clientInfo"))
+                $root.ClientInfo.encode(message.clientInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.modelRequest != null && Object.hasOwnProperty.call(message, "modelRequest"))
+                $root.Model.encode(message.modelRequest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified InputUpdate message, length delimited. Does not implicitly {@link InputUpdate.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof InputUpdate
+         * @static
+         * @param {IInputUpdate} message InputUpdate message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        InputUpdate.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes an InputUpdate message from the specified reader or buffer.
+         * @function decode
+         * @memberof InputUpdate
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {InputUpdate} InputUpdate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        InputUpdate.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.InputUpdate();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.hapticEvent = $root.HapticEvent.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 2: {
+                        message.clientInfo = $root.ClientInfo.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 3: {
+                        message.modelRequest = $root.Model.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes an InputUpdate message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof InputUpdate
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {InputUpdate} InputUpdate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        InputUpdate.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies an InputUpdate message.
+         * @function verify
+         * @memberof InputUpdate
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        InputUpdate.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.hapticEvent != null && message.hasOwnProperty("hapticEvent")) {
+                var error = $root.HapticEvent.verify(message.hapticEvent);
+                if (error)
+                    return "hapticEvent." + error;
+            }
+            if (message.clientInfo != null && message.hasOwnProperty("clientInfo")) {
+                var error = $root.ClientInfo.verify(message.clientInfo);
+                if (error)
+                    return "clientInfo." + error;
+            }
+            if (message.modelRequest != null && message.hasOwnProperty("modelRequest")) {
+                var error = $root.Model.verify(message.modelRequest);
+                if (error)
+                    return "modelRequest." + error;
+            }
+            return null;
+        };
+    
+        /**
+         * Creates an InputUpdate message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof InputUpdate
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {InputUpdate} InputUpdate
+         */
+        InputUpdate.fromObject = function fromObject(object) {
+            if (object instanceof $root.InputUpdate)
+                return object;
+            var message = new $root.InputUpdate();
+            if (object.hapticEvent != null) {
+                if (typeof object.hapticEvent !== "object")
+                    throw TypeError(".InputUpdate.hapticEvent: object expected");
+                message.hapticEvent = $root.HapticEvent.fromObject(object.hapticEvent);
+            }
+            if (object.clientInfo != null) {
+                if (typeof object.clientInfo !== "object")
+                    throw TypeError(".InputUpdate.clientInfo: object expected");
+                message.clientInfo = $root.ClientInfo.fromObject(object.clientInfo);
+            }
+            if (object.modelRequest != null) {
+                if (typeof object.modelRequest !== "object")
+                    throw TypeError(".InputUpdate.modelRequest: object expected");
+                message.modelRequest = $root.Model.fromObject(object.modelRequest);
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from an InputUpdate message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof InputUpdate
+         * @static
+         * @param {InputUpdate} message InputUpdate
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        InputUpdate.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.hapticEvent = null;
+                object.clientInfo = null;
+                object.modelRequest = null;
+            }
+            if (message.hapticEvent != null && message.hasOwnProperty("hapticEvent"))
+                object.hapticEvent = $root.HapticEvent.toObject(message.hapticEvent, options);
+            if (message.clientInfo != null && message.hasOwnProperty("clientInfo"))
+                object.clientInfo = $root.ClientInfo.toObject(message.clientInfo, options);
+            if (message.modelRequest != null && message.hasOwnProperty("modelRequest"))
+                object.modelRequest = $root.Model.toObject(message.modelRequest, options);
+            return object;
+        };
+    
+        /**
+         * Converts this InputUpdate to JSON.
+         * @function toJSON
+         * @memberof InputUpdate
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        InputUpdate.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Gets the default type url for InputUpdate
+         * @function getTypeUrl
+         * @memberof InputUpdate
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        InputUpdate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/InputUpdate";
+        };
+    
+        return InputUpdate;
+    })();
+    
+    $root.Vec2 = (function() {
+    
+        /**
+         * Properties of a Vec2.
+         * @exports IVec2
+         * @interface IVec2
+         * @property {number|null} [x] Vec2 x
+         * @property {number|null} [y] Vec2 y
+         */
+    
+        /**
+         * Constructs a new Vec2.
+         * @exports Vec2
+         * @classdesc Represents a Vec2.
+         * @implements IVec2
+         * @constructor
+         * @param {IVec2=} [properties] Properties to set
+         */
+        function Vec2(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Vec2 x.
+         * @member {number} x
+         * @memberof Vec2
+         * @instance
+         */
+        Vec2.prototype.x = 0;
+    
+        /**
+         * Vec2 y.
+         * @member {number} y
+         * @memberof Vec2
+         * @instance
+         */
+        Vec2.prototype.y = 0;
+    
+        /**
+         * Creates a new Vec2 instance using the specified properties.
+         * @function create
+         * @memberof Vec2
+         * @static
+         * @param {IVec2=} [properties] Properties to set
+         * @returns {Vec2} Vec2 instance
+         */
+        Vec2.create = function create(properties) {
+            return new Vec2(properties);
+        };
+    
+        /**
+         * Encodes the specified Vec2 message. Does not implicitly {@link Vec2.verify|verify} messages.
+         * @function encode
+         * @memberof Vec2
+         * @static
+         * @param {IVec2} message Vec2 message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Vec2.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified Vec2 message, length delimited. Does not implicitly {@link Vec2.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof Vec2
+         * @static
+         * @param {IVec2} message Vec2 message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Vec2.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a Vec2 message from the specified reader or buffer.
+         * @function decode
+         * @memberof Vec2
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {Vec2} Vec2
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Vec2.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Vec2();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.x = reader.float();
+                        break;
+                    }
+                case 2: {
+                        message.y = reader.float();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a Vec2 message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof Vec2
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {Vec2} Vec2
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Vec2.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a Vec2 message.
+         * @function verify
+         * @memberof Vec2
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Vec2.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (typeof message.x !== "number")
+                    return "x: number expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (typeof message.y !== "number")
+                    return "y: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a Vec2 message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof Vec2
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {Vec2} Vec2
+         */
+        Vec2.fromObject = function fromObject(object) {
+            if (object instanceof $root.Vec2)
+                return object;
+            var message = new $root.Vec2();
+            if (object.x != null)
+                message.x = Number(object.x);
+            if (object.y != null)
+                message.y = Number(object.y);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a Vec2 message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof Vec2
+         * @static
+         * @param {Vec2} message Vec2
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Vec2.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.x = 0;
+                object.y = 0;
+            }
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+            return object;
+        };
+    
+        /**
+         * Converts this Vec2 to JSON.
+         * @function toJSON
+         * @memberof Vec2
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Vec2.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Gets the default type url for Vec2
+         * @function getTypeUrl
+         * @memberof Vec2
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Vec2.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/Vec2";
+        };
+    
+        return Vec2;
+    })();
+    
+    $root.Vec3 = (function() {
+    
+        /**
+         * Properties of a Vec3.
+         * @exports IVec3
+         * @interface IVec3
+         * @property {number|null} [x] Vec3 x
+         * @property {number|null} [y] Vec3 y
+         * @property {number|null} [z] Vec3 z
+         */
+    
+        /**
+         * Constructs a new Vec3.
+         * @exports Vec3
+         * @classdesc Represents a Vec3.
+         * @implements IVec3
+         * @constructor
+         * @param {IVec3=} [properties] Properties to set
+         */
+        function Vec3(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Vec3 x.
+         * @member {number} x
+         * @memberof Vec3
+         * @instance
+         */
+        Vec3.prototype.x = 0;
+    
+        /**
+         * Vec3 y.
+         * @member {number} y
+         * @memberof Vec3
+         * @instance
+         */
+        Vec3.prototype.y = 0;
+    
+        /**
+         * Vec3 z.
+         * @member {number} z
+         * @memberof Vec3
+         * @instance
+         */
+        Vec3.prototype.z = 0;
+    
+        /**
+         * Creates a new Vec3 instance using the specified properties.
+         * @function create
+         * @memberof Vec3
+         * @static
+         * @param {IVec3=} [properties] Properties to set
+         * @returns {Vec3} Vec3 instance
+         */
+        Vec3.create = function create(properties) {
+            return new Vec3(properties);
+        };
+    
+        /**
+         * Encodes the specified Vec3 message. Does not implicitly {@link Vec3.verify|verify} messages.
+         * @function encode
+         * @memberof Vec3
+         * @static
+         * @param {IVec3} message Vec3 message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Vec3.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
+            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.z);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified Vec3 message, length delimited. Does not implicitly {@link Vec3.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof Vec3
+         * @static
+         * @param {IVec3} message Vec3 message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Vec3.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a Vec3 message from the specified reader or buffer.
+         * @function decode
+         * @memberof Vec3
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {Vec3} Vec3
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Vec3.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Vec3();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.x = reader.float();
+                        break;
+                    }
+                case 2: {
+                        message.y = reader.float();
+                        break;
+                    }
+                case 3: {
+                        message.z = reader.float();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a Vec3 message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof Vec3
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {Vec3} Vec3
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Vec3.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a Vec3 message.
+         * @function verify
+         * @memberof Vec3
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Vec3.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (typeof message.x !== "number")
+                    return "x: number expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (typeof message.y !== "number")
+                    return "y: number expected";
+            if (message.z != null && message.hasOwnProperty("z"))
+                if (typeof message.z !== "number")
+                    return "z: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a Vec3 message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof Vec3
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {Vec3} Vec3
+         */
+        Vec3.fromObject = function fromObject(object) {
+            if (object instanceof $root.Vec3)
+                return object;
+            var message = new $root.Vec3();
+            if (object.x != null)
+                message.x = Number(object.x);
+            if (object.y != null)
+                message.y = Number(object.y);
+            if (object.z != null)
+                message.z = Number(object.z);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a Vec3 message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof Vec3
+         * @static
+         * @param {Vec3} message Vec3
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Vec3.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.x = 0;
+                object.y = 0;
+                object.z = 0;
+            }
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+            if (message.z != null && message.hasOwnProperty("z"))
+                object.z = options.json && !isFinite(message.z) ? String(message.z) : message.z;
+            return object;
+        };
+    
+        /**
+         * Converts this Vec3 to JSON.
+         * @function toJSON
+         * @memberof Vec3
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Vec3.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Gets the default type url for Vec3
+         * @function getTypeUrl
+         * @memberof Vec3
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Vec3.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/Vec3";
+        };
+    
+        return Vec3;
+    })();
+    
+    $root.Quat = (function() {
+    
+        /**
+         * Properties of a Quat.
+         * @exports IQuat
+         * @interface IQuat
+         * @property {number|null} [w] Quat w
+         * @property {number|null} [x] Quat x
+         * @property {number|null} [y] Quat y
+         * @property {number|null} [z] Quat z
+         */
+    
+        /**
+         * Constructs a new Quat.
+         * @exports Quat
+         * @classdesc Represents a Quat.
+         * @implements IQuat
+         * @constructor
+         * @param {IQuat=} [properties] Properties to set
+         */
+        function Quat(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Quat w.
+         * @member {number} w
+         * @memberof Quat
+         * @instance
+         */
+        Quat.prototype.w = 0;
+    
+        /**
+         * Quat x.
+         * @member {number} x
+         * @memberof Quat
+         * @instance
+         */
+        Quat.prototype.x = 0;
+    
+        /**
+         * Quat y.
+         * @member {number} y
+         * @memberof Quat
+         * @instance
+         */
+        Quat.prototype.y = 0;
+    
+        /**
+         * Quat z.
+         * @member {number} z
+         * @memberof Quat
+         * @instance
+         */
+        Quat.prototype.z = 0;
+    
+        /**
+         * Creates a new Quat instance using the specified properties.
+         * @function create
+         * @memberof Quat
+         * @static
+         * @param {IQuat=} [properties] Properties to set
+         * @returns {Quat} Quat instance
+         */
+        Quat.create = function create(properties) {
+            return new Quat(properties);
+        };
+    
+        /**
+         * Encodes the specified Quat message. Does not implicitly {@link Quat.verify|verify} messages.
+         * @function encode
+         * @memberof Quat
+         * @static
+         * @param {IQuat} message Quat message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Quat.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.w != null && Object.hasOwnProperty.call(message, "w"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.w);
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.y);
+            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.z);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified Quat message, length delimited. Does not implicitly {@link Quat.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof Quat
+         * @static
+         * @param {IQuat} message Quat message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Quat.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a Quat message from the specified reader or buffer.
+         * @function decode
+         * @memberof Quat
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {Quat} Quat
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Quat.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Quat();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.w = reader.float();
+                        break;
+                    }
+                case 2: {
+                        message.x = reader.float();
+                        break;
+                    }
+                case 3: {
+                        message.y = reader.float();
+                        break;
+                    }
+                case 4: {
+                        message.z = reader.float();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a Quat message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof Quat
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {Quat} Quat
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Quat.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a Quat message.
+         * @function verify
+         * @memberof Quat
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Quat.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.w != null && message.hasOwnProperty("w"))
+                if (typeof message.w !== "number")
+                    return "w: number expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (typeof message.x !== "number")
+                    return "x: number expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (typeof message.y !== "number")
+                    return "y: number expected";
+            if (message.z != null && message.hasOwnProperty("z"))
+                if (typeof message.z !== "number")
+                    return "z: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a Quat message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof Quat
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {Quat} Quat
+         */
+        Quat.fromObject = function fromObject(object) {
+            if (object instanceof $root.Quat)
+                return object;
+            var message = new $root.Quat();
+            if (object.w != null)
+                message.w = Number(object.w);
+            if (object.x != null)
+                message.x = Number(object.x);
+            if (object.y != null)
+                message.y = Number(object.y);
+            if (object.z != null)
+                message.z = Number(object.z);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a Quat message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof Quat
+         * @static
+         * @param {Quat} message Quat
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Quat.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.w = 0;
+                object.x = 0;
+                object.y = 0;
+                object.z = 0;
+            }
+            if (message.w != null && message.hasOwnProperty("w"))
+                object.w = options.json && !isFinite(message.w) ? String(message.w) : message.w;
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+            if (message.z != null && message.hasOwnProperty("z"))
+                object.z = options.json && !isFinite(message.z) ? String(message.z) : message.z;
+            return object;
+        };
+    
+        /**
+         * Converts this Quat to JSON.
+         * @function toJSON
+         * @memberof Quat
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Quat.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Gets the default type url for Quat
+         * @function getTypeUrl
+         * @memberof Quat
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Quat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/Quat";
+        };
+    
+        return Quat;
+    })();
+    
+    /**
+     * GestureType enum.
+     * @exports GestureType
+     * @enum {number}
+     * @property {number} NONE=0 NONE value
+     * @property {number} PINCH_TAP=1 PINCH_TAP value
+     * @property {number} CLENCH=2 CLENCH value
+     * @property {number} SURFACE_TAP=3 SURFACE_TAP value
+     * @property {number} PINCH_HOLD=4 PINCH_HOLD value
+     */
+    $root.GestureType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "NONE"] = 0;
+        values[valuesById[1] = "PINCH_TAP"] = 1;
+        values[valuesById[2] = "CLENCH"] = 2;
+        values[valuesById[3] = "SURFACE_TAP"] = 3;
+        values[valuesById[4] = "PINCH_HOLD"] = 4;
+        return values;
+    })();
+    
+    $root.Model = (function() {
+    
+        /**
+         * Properties of a Model.
+         * @exports IModel
+         * @interface IModel
+         * @property {Array.<GestureType>|null} [gestures] Model gestures
+         */
+    
+        /**
+         * Constructs a new Model.
+         * @exports Model
+         * @classdesc Represents a Model.
+         * @implements IModel
+         * @constructor
+         * @param {IModel=} [properties] Properties to set
+         */
+        function Model(properties) {
+            this.gestures = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * Model gestures.
+         * @member {Array.<GestureType>} gestures
+         * @memberof Model
+         * @instance
+         */
+        Model.prototype.gestures = $util.emptyArray;
+    
+        /**
+         * Creates a new Model instance using the specified properties.
+         * @function create
+         * @memberof Model
+         * @static
+         * @param {IModel=} [properties] Properties to set
+         * @returns {Model} Model instance
+         */
+        Model.create = function create(properties) {
+            return new Model(properties);
+        };
+    
+        /**
+         * Encodes the specified Model message. Does not implicitly {@link Model.verify|verify} messages.
+         * @function encode
+         * @memberof Model
+         * @static
+         * @param {IModel} message Model message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Model.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.gestures != null && message.gestures.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.gestures.length; ++i)
+                    writer.int32(message.gestures[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified Model message, length delimited. Does not implicitly {@link Model.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof Model
+         * @static
+         * @param {IModel} message Model message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Model.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a Model message from the specified reader or buffer.
+         * @function decode
+         * @memberof Model
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {Model} Model
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Model.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Model();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.gestures && message.gestures.length))
+                            message.gestures = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.gestures.push(reader.int32());
+                        } else
+                            message.gestures.push(reader.int32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a Model message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof Model
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {Model} Model
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Model.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a Model message.
+         * @function verify
+         * @memberof Model
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Model.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.gestures != null && message.hasOwnProperty("gestures")) {
+                if (!Array.isArray(message.gestures))
+                    return "gestures: array expected";
+                for (var i = 0; i < message.gestures.length; ++i)
+                    switch (message.gestures[i]) {
+                    default:
+                        return "gestures: enum value[] expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        break;
+                    }
+            }
+            return null;
+        };
+    
+        /**
+         * Creates a Model message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof Model
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {Model} Model
+         */
+        Model.fromObject = function fromObject(object) {
+            if (object instanceof $root.Model)
+                return object;
+            var message = new $root.Model();
+            if (object.gestures) {
+                if (!Array.isArray(object.gestures))
+                    throw TypeError(".Model.gestures: array expected");
+                message.gestures = [];
+                for (var i = 0; i < object.gestures.length; ++i)
+                    switch (object.gestures[i]) {
+                    default:
+                        if (typeof object.gestures[i] === "number") {
+                            message.gestures[i] = object.gestures[i];
+                            break;
+                        }
+                    case "NONE":
+                    case 0:
+                        message.gestures[i] = 0;
+                        break;
+                    case "PINCH_TAP":
+                    case 1:
+                        message.gestures[i] = 1;
+                        break;
+                    case "CLENCH":
+                    case 2:
+                        message.gestures[i] = 2;
+                        break;
+                    case "SURFACE_TAP":
+                    case 3:
+                        message.gestures[i] = 3;
+                        break;
+                    case "PINCH_HOLD":
+                    case 4:
+                        message.gestures[i] = 4;
+                        break;
+                    }
+            }
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a Model message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof Model
+         * @static
+         * @param {Model} message Model
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Model.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.gestures = [];
+            if (message.gestures && message.gestures.length) {
+                object.gestures = [];
+                for (var j = 0; j < message.gestures.length; ++j)
+                    object.gestures[j] = options.enums === String ? $root.GestureType[message.gestures[j]] === undefined ? message.gestures[j] : $root.GestureType[message.gestures[j]] : message.gestures[j];
+            }
+            return object;
+        };
+    
+        /**
+         * Converts this Model to JSON.
+         * @function toJSON
+         * @memberof Model
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Model.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Gets the default type url for Model
+         * @function getTypeUrl
+         * @memberof Model
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Model.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/Model";
+        };
+    
+        return Model;
+    })();
+    
     $root.Info = (function() {
     
         /**
@@ -23,6 +1875,16 @@
          * @exports IInfo
          * @interface IInfo
          * @property {Info.Hand|null} [hand] Info hand
+         * @property {string|null} [appId] Info appId
+         * @property {string|null} [appVersion] Info appVersion
+         * @property {Array.<IModel>|null} [availableModels] Info availableModels
+         * @property {IModel|null} [activeModel] Info activeModel
+         * @property {string|null} [modelInfo] Info modelInfo
+         * @property {string|null} [manufacturer] Info manufacturer
+         * @property {string|null} [deviceName] Info deviceName
+         * @property {number|null} [batteryPercentage] Info batteryPercentage
+         * @property {boolean|null} [hapticsAvailable] Info hapticsAvailable
+         * @property {IVec2|null} [touchScreenResolution] Info touchScreenResolution
          */
     
         /**
@@ -34,6 +1896,7 @@
          * @param {IInfo=} [properties] Properties to set
          */
         function Info(properties) {
+            this.availableModels = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -47,6 +1910,86 @@
          * @instance
          */
         Info.prototype.hand = 0;
+    
+        /**
+         * Info appId.
+         * @member {string} appId
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.appId = "";
+    
+        /**
+         * Info appVersion.
+         * @member {string} appVersion
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.appVersion = "";
+    
+        /**
+         * Info availableModels.
+         * @member {Array.<IModel>} availableModels
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.availableModels = $util.emptyArray;
+    
+        /**
+         * Info activeModel.
+         * @member {IModel|null|undefined} activeModel
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.activeModel = null;
+    
+        /**
+         * Info modelInfo.
+         * @member {string} modelInfo
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.modelInfo = "";
+    
+        /**
+         * Info manufacturer.
+         * @member {string} manufacturer
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.manufacturer = "";
+    
+        /**
+         * Info deviceName.
+         * @member {string} deviceName
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.deviceName = "";
+    
+        /**
+         * Info batteryPercentage.
+         * @member {number} batteryPercentage
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.batteryPercentage = 0;
+    
+        /**
+         * Info hapticsAvailable.
+         * @member {boolean} hapticsAvailable
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.hapticsAvailable = false;
+    
+        /**
+         * Info touchScreenResolution.
+         * @member {IVec2|null|undefined} touchScreenResolution
+         * @memberof Info
+         * @instance
+         */
+        Info.prototype.touchScreenResolution = null;
     
         /**
          * Creates a new Info instance using the specified properties.
@@ -74,6 +2017,27 @@
                 writer = $Writer.create();
             if (message.hand != null && Object.hasOwnProperty.call(message, "hand"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hand);
+            if (message.appId != null && Object.hasOwnProperty.call(message, "appId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.appId);
+            if (message.appVersion != null && Object.hasOwnProperty.call(message, "appVersion"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.appVersion);
+            if (message.availableModels != null && message.availableModels.length)
+                for (var i = 0; i < message.availableModels.length; ++i)
+                    $root.Model.encode(message.availableModels[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.activeModel != null && Object.hasOwnProperty.call(message, "activeModel"))
+                $root.Model.encode(message.activeModel, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.modelInfo != null && Object.hasOwnProperty.call(message, "modelInfo"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.modelInfo);
+            if (message.manufacturer != null && Object.hasOwnProperty.call(message, "manufacturer"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.manufacturer);
+            if (message.deviceName != null && Object.hasOwnProperty.call(message, "deviceName"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.deviceName);
+            if (message.batteryPercentage != null && Object.hasOwnProperty.call(message, "batteryPercentage"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.batteryPercentage);
+            if (message.hapticsAvailable != null && Object.hasOwnProperty.call(message, "hapticsAvailable"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.hapticsAvailable);
+            if (message.touchScreenResolution != null && Object.hasOwnProperty.call(message, "touchScreenResolution"))
+                $root.Vec2.encode(message.touchScreenResolution, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             return writer;
         };
     
@@ -110,6 +2074,48 @@
                 switch (tag >>> 3) {
                 case 1: {
                         message.hand = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.appId = reader.string();
+                        break;
+                    }
+                case 3: {
+                        message.appVersion = reader.string();
+                        break;
+                    }
+                case 4: {
+                        if (!(message.availableModels && message.availableModels.length))
+                            message.availableModels = [];
+                        message.availableModels.push($root.Model.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 5: {
+                        message.activeModel = $root.Model.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 6: {
+                        message.modelInfo = reader.string();
+                        break;
+                    }
+                case 7: {
+                        message.manufacturer = reader.string();
+                        break;
+                    }
+                case 8: {
+                        message.deviceName = reader.string();
+                        break;
+                    }
+                case 9: {
+                        message.batteryPercentage = reader.int32();
+                        break;
+                    }
+                case 10: {
+                        message.hapticsAvailable = reader.bool();
+                        break;
+                    }
+                case 11: {
+                        message.touchScreenResolution = $root.Vec2.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -156,6 +2162,46 @@
                 case 2:
                     break;
                 }
+            if (message.appId != null && message.hasOwnProperty("appId"))
+                if (!$util.isString(message.appId))
+                    return "appId: string expected";
+            if (message.appVersion != null && message.hasOwnProperty("appVersion"))
+                if (!$util.isString(message.appVersion))
+                    return "appVersion: string expected";
+            if (message.availableModels != null && message.hasOwnProperty("availableModels")) {
+                if (!Array.isArray(message.availableModels))
+                    return "availableModels: array expected";
+                for (var i = 0; i < message.availableModels.length; ++i) {
+                    var error = $root.Model.verify(message.availableModels[i]);
+                    if (error)
+                        return "availableModels." + error;
+                }
+            }
+            if (message.activeModel != null && message.hasOwnProperty("activeModel")) {
+                var error = $root.Model.verify(message.activeModel);
+                if (error)
+                    return "activeModel." + error;
+            }
+            if (message.modelInfo != null && message.hasOwnProperty("modelInfo"))
+                if (!$util.isString(message.modelInfo))
+                    return "modelInfo: string expected";
+            if (message.manufacturer != null && message.hasOwnProperty("manufacturer"))
+                if (!$util.isString(message.manufacturer))
+                    return "manufacturer: string expected";
+            if (message.deviceName != null && message.hasOwnProperty("deviceName"))
+                if (!$util.isString(message.deviceName))
+                    return "deviceName: string expected";
+            if (message.batteryPercentage != null && message.hasOwnProperty("batteryPercentage"))
+                if (!$util.isInteger(message.batteryPercentage))
+                    return "batteryPercentage: integer expected";
+            if (message.hapticsAvailable != null && message.hasOwnProperty("hapticsAvailable"))
+                if (typeof message.hapticsAvailable !== "boolean")
+                    return "hapticsAvailable: boolean expected";
+            if (message.touchScreenResolution != null && message.hasOwnProperty("touchScreenResolution")) {
+                var error = $root.Vec2.verify(message.touchScreenResolution);
+                if (error)
+                    return "touchScreenResolution." + error;
+            }
             return null;
         };
     
@@ -191,6 +2237,40 @@
                 message.hand = 2;
                 break;
             }
+            if (object.appId != null)
+                message.appId = String(object.appId);
+            if (object.appVersion != null)
+                message.appVersion = String(object.appVersion);
+            if (object.availableModels) {
+                if (!Array.isArray(object.availableModels))
+                    throw TypeError(".Info.availableModels: array expected");
+                message.availableModels = [];
+                for (var i = 0; i < object.availableModels.length; ++i) {
+                    if (typeof object.availableModels[i] !== "object")
+                        throw TypeError(".Info.availableModels: object expected");
+                    message.availableModels[i] = $root.Model.fromObject(object.availableModels[i]);
+                }
+            }
+            if (object.activeModel != null) {
+                if (typeof object.activeModel !== "object")
+                    throw TypeError(".Info.activeModel: object expected");
+                message.activeModel = $root.Model.fromObject(object.activeModel);
+            }
+            if (object.modelInfo != null)
+                message.modelInfo = String(object.modelInfo);
+            if (object.manufacturer != null)
+                message.manufacturer = String(object.manufacturer);
+            if (object.deviceName != null)
+                message.deviceName = String(object.deviceName);
+            if (object.batteryPercentage != null)
+                message.batteryPercentage = object.batteryPercentage | 0;
+            if (object.hapticsAvailable != null)
+                message.hapticsAvailable = Boolean(object.hapticsAvailable);
+            if (object.touchScreenResolution != null) {
+                if (typeof object.touchScreenResolution !== "object")
+                    throw TypeError(".Info.touchScreenResolution: object expected");
+                message.touchScreenResolution = $root.Vec2.fromObject(object.touchScreenResolution);
+            }
             return message;
         };
     
@@ -207,10 +2287,45 @@
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.arrays || options.defaults)
+                object.availableModels = [];
+            if (options.defaults) {
                 object.hand = options.enums === String ? "NONE" : 0;
+                object.appId = "";
+                object.appVersion = "";
+                object.activeModel = null;
+                object.modelInfo = "";
+                object.manufacturer = "";
+                object.deviceName = "";
+                object.batteryPercentage = 0;
+                object.hapticsAvailable = false;
+                object.touchScreenResolution = null;
+            }
             if (message.hand != null && message.hasOwnProperty("hand"))
                 object.hand = options.enums === String ? $root.Info.Hand[message.hand] === undefined ? message.hand : $root.Info.Hand[message.hand] : message.hand;
+            if (message.appId != null && message.hasOwnProperty("appId"))
+                object.appId = message.appId;
+            if (message.appVersion != null && message.hasOwnProperty("appVersion"))
+                object.appVersion = message.appVersion;
+            if (message.availableModels && message.availableModels.length) {
+                object.availableModels = [];
+                for (var j = 0; j < message.availableModels.length; ++j)
+                    object.availableModels[j] = $root.Model.toObject(message.availableModels[j], options);
+            }
+            if (message.activeModel != null && message.hasOwnProperty("activeModel"))
+                object.activeModel = $root.Model.toObject(message.activeModel, options);
+            if (message.modelInfo != null && message.hasOwnProperty("modelInfo"))
+                object.modelInfo = message.modelInfo;
+            if (message.manufacturer != null && message.hasOwnProperty("manufacturer"))
+                object.manufacturer = message.manufacturer;
+            if (message.deviceName != null && message.hasOwnProperty("deviceName"))
+                object.deviceName = message.deviceName;
+            if (message.batteryPercentage != null && message.hasOwnProperty("batteryPercentage"))
+                object.batteryPercentage = message.batteryPercentage;
+            if (message.hapticsAvailable != null && message.hasOwnProperty("hapticsAvailable"))
+                object.hapticsAvailable = message.hapticsAvailable;
+            if (message.touchScreenResolution != null && message.hasOwnProperty("touchScreenResolution"))
+                object.touchScreenResolution = $root.Vec2.toObject(message.touchScreenResolution, options);
             return object;
         };
     
@@ -269,6 +2384,8 @@
          * @property {IVec3|null} [acc] SensorFrame acc
          * @property {IVec3|null} [grav] SensorFrame grav
          * @property {IQuat|null} [quat] SensorFrame quat
+         * @property {IVec3|null} [mag] SensorFrame mag
+         * @property {IVec3|null} [magCal] SensorFrame magCal
          * @property {number|null} [deltaTime] SensorFrame deltaTime
          */
     
@@ -320,6 +2437,22 @@
         SensorFrame.prototype.quat = null;
     
         /**
+         * SensorFrame mag.
+         * @member {IVec3|null|undefined} mag
+         * @memberof SensorFrame
+         * @instance
+         */
+        SensorFrame.prototype.mag = null;
+    
+        /**
+         * SensorFrame magCal.
+         * @member {IVec3|null|undefined} magCal
+         * @memberof SensorFrame
+         * @instance
+         */
+        SensorFrame.prototype.magCal = null;
+    
+        /**
          * SensorFrame deltaTime.
          * @member {number} deltaTime
          * @memberof SensorFrame
@@ -361,6 +2494,10 @@
                 $root.Quat.encode(message.quat, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.deltaTime != null && Object.hasOwnProperty.call(message, "deltaTime"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.deltaTime);
+            if (message.mag != null && Object.hasOwnProperty.call(message, "mag"))
+                $root.Vec3.encode(message.mag, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.magCal != null && Object.hasOwnProperty.call(message, "magCal"))
+                $root.Vec3.encode(message.magCal, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
             return writer;
         };
     
@@ -409,6 +2546,14 @@
                     }
                 case 4: {
                         message.quat = $root.Quat.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 6: {
+                        message.mag = $root.Vec3.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 7: {
+                        message.magCal = $root.Vec3.decode(reader, reader.uint32());
                         break;
                     }
                 case 5: {
@@ -470,6 +2615,16 @@
                 if (error)
                     return "quat." + error;
             }
+            if (message.mag != null && message.hasOwnProperty("mag")) {
+                var error = $root.Vec3.verify(message.mag);
+                if (error)
+                    return "mag." + error;
+            }
+            if (message.magCal != null && message.hasOwnProperty("magCal")) {
+                var error = $root.Vec3.verify(message.magCal);
+                if (error)
+                    return "magCal." + error;
+            }
             if (message.deltaTime != null && message.hasOwnProperty("deltaTime"))
                 if (!$util.isInteger(message.deltaTime))
                     return "deltaTime: integer expected";
@@ -508,6 +2663,16 @@
                     throw TypeError(".SensorFrame.quat: object expected");
                 message.quat = $root.Quat.fromObject(object.quat);
             }
+            if (object.mag != null) {
+                if (typeof object.mag !== "object")
+                    throw TypeError(".SensorFrame.mag: object expected");
+                message.mag = $root.Vec3.fromObject(object.mag);
+            }
+            if (object.magCal != null) {
+                if (typeof object.magCal !== "object")
+                    throw TypeError(".SensorFrame.magCal: object expected");
+                message.magCal = $root.Vec3.fromObject(object.magCal);
+            }
             if (object.deltaTime != null)
                 message.deltaTime = object.deltaTime | 0;
             return message;
@@ -532,6 +2697,8 @@
                 object.grav = null;
                 object.quat = null;
                 object.deltaTime = 0;
+                object.mag = null;
+                object.magCal = null;
             }
             if (message.gyro != null && message.hasOwnProperty("gyro"))
                 object.gyro = $root.Vec3.toObject(message.gyro, options);
@@ -543,6 +2710,10 @@
                 object.quat = $root.Quat.toObject(message.quat, options);
             if (message.deltaTime != null && message.hasOwnProperty("deltaTime"))
                 object.deltaTime = message.deltaTime;
+            if (message.mag != null && message.hasOwnProperty("mag"))
+                object.mag = $root.Vec3.toObject(message.mag, options);
+            if (message.magCal != null && message.hasOwnProperty("magCal"))
+                object.magCal = $root.Vec3.toObject(message.magCal, options);
             return object;
         };
     
@@ -581,7 +2752,7 @@
          * Properties of a Gesture.
          * @exports IGesture
          * @interface IGesture
-         * @property {Gesture.GestureType|null} [type] Gesture type
+         * @property {GestureType|null} [type] Gesture type
          * @property {number|null} [deltaTime] Gesture deltaTime
          */
     
@@ -602,7 +2773,7 @@
     
         /**
          * Gesture type.
-         * @member {Gesture.GestureType} type
+         * @member {GestureType} type
          * @memberof Gesture
          * @instance
          */
@@ -728,6 +2899,8 @@
                 case 0:
                 case 1:
                 case 2:
+                case 3:
+                case 4:
                     break;
                 }
             if (message.deltaTime != null && message.hasOwnProperty("deltaTime"))
@@ -759,13 +2932,21 @@
             case 0:
                 message.type = 0;
                 break;
-            case "TAP":
+            case "PINCH_TAP":
             case 1:
                 message.type = 1;
                 break;
             case "CLENCH":
             case 2:
                 message.type = 2;
+                break;
+            case "SURFACE_TAP":
+            case 3:
+                message.type = 3;
+                break;
+            case "PINCH_HOLD":
+            case 4:
+                message.type = 4;
                 break;
             }
             if (object.deltaTime != null)
@@ -791,7 +2972,7 @@
                 object.deltaTime = 0;
             }
             if (message.type != null && message.hasOwnProperty("type"))
-                object.type = options.enums === String ? $root.Gesture.GestureType[message.type] === undefined ? message.type : $root.Gesture.GestureType[message.type] : message.type;
+                object.type = options.enums === String ? $root.GestureType[message.type] === undefined ? message.type : $root.GestureType[message.type] : message.type;
             if (message.deltaTime != null && message.hasOwnProperty("deltaTime"))
                 object.deltaTime = message.deltaTime;
             return object;
@@ -822,22 +3003,6 @@
             }
             return typeUrlPrefix + "/Gesture";
         };
-    
-        /**
-         * GestureType enum.
-         * @name Gesture.GestureType
-         * @enum {number}
-         * @property {number} NONE=0 NONE value
-         * @property {number} TAP=1 TAP value
-         * @property {number} CLENCH=2 CLENCH value
-         */
-        Gesture.GestureType = (function() {
-            var valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[0] = "NONE"] = 0;
-            values[valuesById[1] = "TAP"] = 1;
-            values[valuesById[2] = "CLENCH"] = 2;
-            return values;
-        })();
     
         return Gesture;
     })();
@@ -1693,6 +3858,267 @@
         return ButtonEvent;
     })();
     
+    $root.ProbabilityEntry = (function() {
+    
+        /**
+         * Properties of a ProbabilityEntry.
+         * @exports IProbabilityEntry
+         * @interface IProbabilityEntry
+         * @property {GestureType|null} [label] ProbabilityEntry label
+         * @property {number|null} [probability] ProbabilityEntry probability
+         */
+    
+        /**
+         * Constructs a new ProbabilityEntry.
+         * @exports ProbabilityEntry
+         * @classdesc Represents a ProbabilityEntry.
+         * @implements IProbabilityEntry
+         * @constructor
+         * @param {IProbabilityEntry=} [properties] Properties to set
+         */
+        function ProbabilityEntry(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+    
+        /**
+         * ProbabilityEntry label.
+         * @member {GestureType} label
+         * @memberof ProbabilityEntry
+         * @instance
+         */
+        ProbabilityEntry.prototype.label = 0;
+    
+        /**
+         * ProbabilityEntry probability.
+         * @member {number} probability
+         * @memberof ProbabilityEntry
+         * @instance
+         */
+        ProbabilityEntry.prototype.probability = 0;
+    
+        /**
+         * Creates a new ProbabilityEntry instance using the specified properties.
+         * @function create
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {IProbabilityEntry=} [properties] Properties to set
+         * @returns {ProbabilityEntry} ProbabilityEntry instance
+         */
+        ProbabilityEntry.create = function create(properties) {
+            return new ProbabilityEntry(properties);
+        };
+    
+        /**
+         * Encodes the specified ProbabilityEntry message. Does not implicitly {@link ProbabilityEntry.verify|verify} messages.
+         * @function encode
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {IProbabilityEntry} message ProbabilityEntry message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ProbabilityEntry.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.label);
+            if (message.probability != null && Object.hasOwnProperty.call(message, "probability"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.probability);
+            return writer;
+        };
+    
+        /**
+         * Encodes the specified ProbabilityEntry message, length delimited. Does not implicitly {@link ProbabilityEntry.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {IProbabilityEntry} message ProbabilityEntry message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ProbabilityEntry.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+    
+        /**
+         * Decodes a ProbabilityEntry message from the specified reader or buffer.
+         * @function decode
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {ProbabilityEntry} ProbabilityEntry
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ProbabilityEntry.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ProbabilityEntry();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.label = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.probability = reader.float();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+    
+        /**
+         * Decodes a ProbabilityEntry message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {ProbabilityEntry} ProbabilityEntry
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ProbabilityEntry.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+    
+        /**
+         * Verifies a ProbabilityEntry message.
+         * @function verify
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ProbabilityEntry.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.label != null && message.hasOwnProperty("label"))
+                switch (message.label) {
+                default:
+                    return "label: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
+                }
+            if (message.probability != null && message.hasOwnProperty("probability"))
+                if (typeof message.probability !== "number")
+                    return "probability: number expected";
+            return null;
+        };
+    
+        /**
+         * Creates a ProbabilityEntry message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {ProbabilityEntry} ProbabilityEntry
+         */
+        ProbabilityEntry.fromObject = function fromObject(object) {
+            if (object instanceof $root.ProbabilityEntry)
+                return object;
+            var message = new $root.ProbabilityEntry();
+            switch (object.label) {
+            default:
+                if (typeof object.label === "number") {
+                    message.label = object.label;
+                    break;
+                }
+                break;
+            case "NONE":
+            case 0:
+                message.label = 0;
+                break;
+            case "PINCH_TAP":
+            case 1:
+                message.label = 1;
+                break;
+            case "CLENCH":
+            case 2:
+                message.label = 2;
+                break;
+            case "SURFACE_TAP":
+            case 3:
+                message.label = 3;
+                break;
+            case "PINCH_HOLD":
+            case 4:
+                message.label = 4;
+                break;
+            }
+            if (object.probability != null)
+                message.probability = Number(object.probability);
+            return message;
+        };
+    
+        /**
+         * Creates a plain object from a ProbabilityEntry message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {ProbabilityEntry} message ProbabilityEntry
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ProbabilityEntry.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.label = options.enums === String ? "NONE" : 0;
+                object.probability = 0;
+            }
+            if (message.label != null && message.hasOwnProperty("label"))
+                object.label = options.enums === String ? $root.GestureType[message.label] === undefined ? message.label : $root.GestureType[message.label] : message.label;
+            if (message.probability != null && message.hasOwnProperty("probability"))
+                object.probability = options.json && !isFinite(message.probability) ? String(message.probability) : message.probability;
+            return object;
+        };
+    
+        /**
+         * Converts this ProbabilityEntry to JSON.
+         * @function toJSON
+         * @memberof ProbabilityEntry
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ProbabilityEntry.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+    
+        /**
+         * Gets the default type url for ProbabilityEntry
+         * @function getTypeUrl
+         * @memberof ProbabilityEntry
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ProbabilityEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/ProbabilityEntry";
+        };
+    
+        return ProbabilityEntry;
+    })();
+    
     $root.Update = (function() {
     
         /**
@@ -1708,6 +4134,8 @@
          * @property {number|null} [deltaTime] Update deltaTime
          * @property {number|Long|null} [unixTime] Update unixTime
          * @property {IInfo|null} [info] Update info
+         * @property {Array.<IProbabilityEntry>|null} [probabilities] Update probabilities
+         * @property {number|null} [pressure] Update pressure
          */
     
         /**
@@ -1725,6 +4153,7 @@
             this.buttonEvents = [];
             this.rotaryEvents = [];
             this.signals = [];
+            this.probabilities = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1804,6 +4233,22 @@
         Update.prototype.info = null;
     
         /**
+         * Update probabilities.
+         * @member {Array.<IProbabilityEntry>} probabilities
+         * @memberof Update
+         * @instance
+         */
+        Update.prototype.probabilities = $util.emptyArray;
+    
+        /**
+         * Update pressure.
+         * @member {number} pressure
+         * @memberof Update
+         * @instance
+         */
+        Update.prototype.pressure = 0;
+    
+        /**
          * Creates a new Update instance using the specified properties.
          * @function create
          * @memberof Update
@@ -1854,6 +4299,11 @@
                 writer.uint32(/* id 8, wireType 0 =*/64).int64(message.unixTime);
             if (message.info != null && Object.hasOwnProperty.call(message, "info"))
                 $root.Info.encode(message.info, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            if (message.probabilities != null && message.probabilities.length)
+                for (var i = 0; i < message.probabilities.length; ++i)
+                    $root.ProbabilityEntry.encode(message.probabilities[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            if (message.pressure != null && Object.hasOwnProperty.call(message, "pressure"))
+                writer.uint32(/* id 16, wireType 5 =*/133).float(message.pressure);
             return writer;
         };
     
@@ -1939,6 +4389,16 @@
                     }
                 case 9: {
                         message.info = $root.Info.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 10: {
+                        if (!(message.probabilities && message.probabilities.length))
+                            message.probabilities = [];
+                        message.probabilities.push($root.ProbabilityEntry.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 16: {
+                        message.pressure = reader.float();
                         break;
                     }
                 default:
@@ -2046,6 +4506,18 @@
                 if (error)
                     return "info." + error;
             }
+            if (message.probabilities != null && message.hasOwnProperty("probabilities")) {
+                if (!Array.isArray(message.probabilities))
+                    return "probabilities: array expected";
+                for (var i = 0; i < message.probabilities.length; ++i) {
+                    var error = $root.ProbabilityEntry.verify(message.probabilities[i]);
+                    if (error)
+                        return "probabilities." + error;
+                }
+            }
+            if (message.pressure != null && message.hasOwnProperty("pressure"))
+                if (typeof message.pressure !== "number")
+                    return "pressure: number expected";
             return null;
         };
     
@@ -2156,6 +4628,18 @@
                     throw TypeError(".Update.info: object expected");
                 message.info = $root.Info.fromObject(object.info);
             }
+            if (object.probabilities) {
+                if (!Array.isArray(object.probabilities))
+                    throw TypeError(".Update.probabilities: array expected");
+                message.probabilities = [];
+                for (var i = 0; i < object.probabilities.length; ++i) {
+                    if (typeof object.probabilities[i] !== "object")
+                        throw TypeError(".Update.probabilities: object expected");
+                    message.probabilities[i] = $root.ProbabilityEntry.fromObject(object.probabilities[i]);
+                }
+            }
+            if (object.pressure != null)
+                message.pressure = Number(object.pressure);
             return message;
         };
     
@@ -2179,6 +4663,7 @@
                 object.buttonEvents = [];
                 object.rotaryEvents = [];
                 object.signals = [];
+                object.probabilities = [];
             }
             if (options.defaults) {
                 object.deltaTime = 0;
@@ -2188,6 +4673,7 @@
                 } else
                     object.unixTime = options.longs === String ? "0" : 0;
                 object.info = null;
+                object.pressure = 0;
             }
             if (message.sensorFrames && message.sensorFrames.length) {
                 object.sensorFrames = [];
@@ -2228,6 +4714,13 @@
                     object.unixTime = options.longs === String ? $util.Long.prototype.toString.call(message.unixTime) : options.longs === Number ? new $util.LongBits(message.unixTime.low >>> 0, message.unixTime.high >>> 0).toNumber() : message.unixTime;
             if (message.info != null && message.hasOwnProperty("info"))
                 object.info = $root.Info.toObject(message.info, options);
+            if (message.probabilities && message.probabilities.length) {
+                object.probabilities = [];
+                for (var j = 0; j < message.probabilities.length; ++j)
+                    object.probabilities[j] = $root.ProbabilityEntry.toObject(message.probabilities[j], options);
+            }
+            if (message.pressure != null && message.hasOwnProperty("pressure"))
+                object.pressure = options.json && !isFinite(message.pressure) ? String(message.pressure) : message.pressure;
             return object;
         };
     
@@ -2276,1549 +4769,6 @@
         })();
     
         return Update;
-    })();
-    
-    $root.Vec2 = (function() {
-    
-        /**
-         * Properties of a Vec2.
-         * @exports IVec2
-         * @interface IVec2
-         * @property {number|null} [x] Vec2 x
-         * @property {number|null} [y] Vec2 y
-         */
-    
-        /**
-         * Constructs a new Vec2.
-         * @exports Vec2
-         * @classdesc Represents a Vec2.
-         * @implements IVec2
-         * @constructor
-         * @param {IVec2=} [properties] Properties to set
-         */
-        function Vec2(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * Vec2 x.
-         * @member {number} x
-         * @memberof Vec2
-         * @instance
-         */
-        Vec2.prototype.x = 0;
-    
-        /**
-         * Vec2 y.
-         * @member {number} y
-         * @memberof Vec2
-         * @instance
-         */
-        Vec2.prototype.y = 0;
-    
-        /**
-         * Creates a new Vec2 instance using the specified properties.
-         * @function create
-         * @memberof Vec2
-         * @static
-         * @param {IVec2=} [properties] Properties to set
-         * @returns {Vec2} Vec2 instance
-         */
-        Vec2.create = function create(properties) {
-            return new Vec2(properties);
-        };
-    
-        /**
-         * Encodes the specified Vec2 message. Does not implicitly {@link Vec2.verify|verify} messages.
-         * @function encode
-         * @memberof Vec2
-         * @static
-         * @param {IVec2} message Vec2 message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Vec2.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified Vec2 message, length delimited. Does not implicitly {@link Vec2.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof Vec2
-         * @static
-         * @param {IVec2} message Vec2 message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Vec2.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a Vec2 message from the specified reader or buffer.
-         * @function decode
-         * @memberof Vec2
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {Vec2} Vec2
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Vec2.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Vec2();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.x = reader.float();
-                        break;
-                    }
-                case 2: {
-                        message.y = reader.float();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a Vec2 message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof Vec2
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {Vec2} Vec2
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Vec2.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a Vec2 message.
-         * @function verify
-         * @memberof Vec2
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        Vec2.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.x != null && message.hasOwnProperty("x"))
-                if (typeof message.x !== "number")
-                    return "x: number expected";
-            if (message.y != null && message.hasOwnProperty("y"))
-                if (typeof message.y !== "number")
-                    return "y: number expected";
-            return null;
-        };
-    
-        /**
-         * Creates a Vec2 message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof Vec2
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {Vec2} Vec2
-         */
-        Vec2.fromObject = function fromObject(object) {
-            if (object instanceof $root.Vec2)
-                return object;
-            var message = new $root.Vec2();
-            if (object.x != null)
-                message.x = Number(object.x);
-            if (object.y != null)
-                message.y = Number(object.y);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a Vec2 message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof Vec2
-         * @static
-         * @param {Vec2} message Vec2
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        Vec2.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.x = 0;
-                object.y = 0;
-            }
-            if (message.x != null && message.hasOwnProperty("x"))
-                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
-            if (message.y != null && message.hasOwnProperty("y"))
-                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
-            return object;
-        };
-    
-        /**
-         * Converts this Vec2 to JSON.
-         * @function toJSON
-         * @memberof Vec2
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        Vec2.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        /**
-         * Gets the default type url for Vec2
-         * @function getTypeUrl
-         * @memberof Vec2
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        Vec2.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/Vec2";
-        };
-    
-        return Vec2;
-    })();
-    
-    $root.Vec3 = (function() {
-    
-        /**
-         * Properties of a Vec3.
-         * @exports IVec3
-         * @interface IVec3
-         * @property {number|null} [x] Vec3 x
-         * @property {number|null} [y] Vec3 y
-         * @property {number|null} [z] Vec3 z
-         */
-    
-        /**
-         * Constructs a new Vec3.
-         * @exports Vec3
-         * @classdesc Represents a Vec3.
-         * @implements IVec3
-         * @constructor
-         * @param {IVec3=} [properties] Properties to set
-         */
-        function Vec3(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * Vec3 x.
-         * @member {number} x
-         * @memberof Vec3
-         * @instance
-         */
-        Vec3.prototype.x = 0;
-    
-        /**
-         * Vec3 y.
-         * @member {number} y
-         * @memberof Vec3
-         * @instance
-         */
-        Vec3.prototype.y = 0;
-    
-        /**
-         * Vec3 z.
-         * @member {number} z
-         * @memberof Vec3
-         * @instance
-         */
-        Vec3.prototype.z = 0;
-    
-        /**
-         * Creates a new Vec3 instance using the specified properties.
-         * @function create
-         * @memberof Vec3
-         * @static
-         * @param {IVec3=} [properties] Properties to set
-         * @returns {Vec3} Vec3 instance
-         */
-        Vec3.create = function create(properties) {
-            return new Vec3(properties);
-        };
-    
-        /**
-         * Encodes the specified Vec3 message. Does not implicitly {@link Vec3.verify|verify} messages.
-         * @function encode
-         * @memberof Vec3
-         * @static
-         * @param {IVec3} message Vec3 message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Vec3.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
-            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
-                writer.uint32(/* id 3, wireType 5 =*/29).float(message.z);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified Vec3 message, length delimited. Does not implicitly {@link Vec3.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof Vec3
-         * @static
-         * @param {IVec3} message Vec3 message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Vec3.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a Vec3 message from the specified reader or buffer.
-         * @function decode
-         * @memberof Vec3
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {Vec3} Vec3
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Vec3.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Vec3();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.x = reader.float();
-                        break;
-                    }
-                case 2: {
-                        message.y = reader.float();
-                        break;
-                    }
-                case 3: {
-                        message.z = reader.float();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a Vec3 message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof Vec3
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {Vec3} Vec3
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Vec3.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a Vec3 message.
-         * @function verify
-         * @memberof Vec3
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        Vec3.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.x != null && message.hasOwnProperty("x"))
-                if (typeof message.x !== "number")
-                    return "x: number expected";
-            if (message.y != null && message.hasOwnProperty("y"))
-                if (typeof message.y !== "number")
-                    return "y: number expected";
-            if (message.z != null && message.hasOwnProperty("z"))
-                if (typeof message.z !== "number")
-                    return "z: number expected";
-            return null;
-        };
-    
-        /**
-         * Creates a Vec3 message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof Vec3
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {Vec3} Vec3
-         */
-        Vec3.fromObject = function fromObject(object) {
-            if (object instanceof $root.Vec3)
-                return object;
-            var message = new $root.Vec3();
-            if (object.x != null)
-                message.x = Number(object.x);
-            if (object.y != null)
-                message.y = Number(object.y);
-            if (object.z != null)
-                message.z = Number(object.z);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a Vec3 message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof Vec3
-         * @static
-         * @param {Vec3} message Vec3
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        Vec3.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.x = 0;
-                object.y = 0;
-                object.z = 0;
-            }
-            if (message.x != null && message.hasOwnProperty("x"))
-                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
-            if (message.y != null && message.hasOwnProperty("y"))
-                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
-            if (message.z != null && message.hasOwnProperty("z"))
-                object.z = options.json && !isFinite(message.z) ? String(message.z) : message.z;
-            return object;
-        };
-    
-        /**
-         * Converts this Vec3 to JSON.
-         * @function toJSON
-         * @memberof Vec3
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        Vec3.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        /**
-         * Gets the default type url for Vec3
-         * @function getTypeUrl
-         * @memberof Vec3
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        Vec3.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/Vec3";
-        };
-    
-        return Vec3;
-    })();
-    
-    $root.Quat = (function() {
-    
-        /**
-         * Properties of a Quat.
-         * @exports IQuat
-         * @interface IQuat
-         * @property {number|null} [w] Quat w
-         * @property {number|null} [x] Quat x
-         * @property {number|null} [y] Quat y
-         * @property {number|null} [z] Quat z
-         */
-    
-        /**
-         * Constructs a new Quat.
-         * @exports Quat
-         * @classdesc Represents a Quat.
-         * @implements IQuat
-         * @constructor
-         * @param {IQuat=} [properties] Properties to set
-         */
-        function Quat(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * Quat w.
-         * @member {number} w
-         * @memberof Quat
-         * @instance
-         */
-        Quat.prototype.w = 0;
-    
-        /**
-         * Quat x.
-         * @member {number} x
-         * @memberof Quat
-         * @instance
-         */
-        Quat.prototype.x = 0;
-    
-        /**
-         * Quat y.
-         * @member {number} y
-         * @memberof Quat
-         * @instance
-         */
-        Quat.prototype.y = 0;
-    
-        /**
-         * Quat z.
-         * @member {number} z
-         * @memberof Quat
-         * @instance
-         */
-        Quat.prototype.z = 0;
-    
-        /**
-         * Creates a new Quat instance using the specified properties.
-         * @function create
-         * @memberof Quat
-         * @static
-         * @param {IQuat=} [properties] Properties to set
-         * @returns {Quat} Quat instance
-         */
-        Quat.create = function create(properties) {
-            return new Quat(properties);
-        };
-    
-        /**
-         * Encodes the specified Quat message. Does not implicitly {@link Quat.verify|verify} messages.
-         * @function encode
-         * @memberof Quat
-         * @static
-         * @param {IQuat} message Quat message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Quat.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.w != null && Object.hasOwnProperty.call(message, "w"))
-                writer.uint32(/* id 1, wireType 5 =*/13).float(message.w);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 2, wireType 5 =*/21).float(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 3, wireType 5 =*/29).float(message.y);
-            if (message.z != null && Object.hasOwnProperty.call(message, "z"))
-                writer.uint32(/* id 4, wireType 5 =*/37).float(message.z);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified Quat message, length delimited. Does not implicitly {@link Quat.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof Quat
-         * @static
-         * @param {IQuat} message Quat message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Quat.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a Quat message from the specified reader or buffer.
-         * @function decode
-         * @memberof Quat
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {Quat} Quat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Quat.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Quat();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.w = reader.float();
-                        break;
-                    }
-                case 2: {
-                        message.x = reader.float();
-                        break;
-                    }
-                case 3: {
-                        message.y = reader.float();
-                        break;
-                    }
-                case 4: {
-                        message.z = reader.float();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a Quat message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof Quat
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {Quat} Quat
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Quat.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a Quat message.
-         * @function verify
-         * @memberof Quat
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        Quat.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.w != null && message.hasOwnProperty("w"))
-                if (typeof message.w !== "number")
-                    return "w: number expected";
-            if (message.x != null && message.hasOwnProperty("x"))
-                if (typeof message.x !== "number")
-                    return "x: number expected";
-            if (message.y != null && message.hasOwnProperty("y"))
-                if (typeof message.y !== "number")
-                    return "y: number expected";
-            if (message.z != null && message.hasOwnProperty("z"))
-                if (typeof message.z !== "number")
-                    return "z: number expected";
-            return null;
-        };
-    
-        /**
-         * Creates a Quat message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof Quat
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {Quat} Quat
-         */
-        Quat.fromObject = function fromObject(object) {
-            if (object instanceof $root.Quat)
-                return object;
-            var message = new $root.Quat();
-            if (object.w != null)
-                message.w = Number(object.w);
-            if (object.x != null)
-                message.x = Number(object.x);
-            if (object.y != null)
-                message.y = Number(object.y);
-            if (object.z != null)
-                message.z = Number(object.z);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a Quat message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof Quat
-         * @static
-         * @param {Quat} message Quat
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        Quat.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.w = 0;
-                object.x = 0;
-                object.y = 0;
-                object.z = 0;
-            }
-            if (message.w != null && message.hasOwnProperty("w"))
-                object.w = options.json && !isFinite(message.w) ? String(message.w) : message.w;
-            if (message.x != null && message.hasOwnProperty("x"))
-                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
-            if (message.y != null && message.hasOwnProperty("y"))
-                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
-            if (message.z != null && message.hasOwnProperty("z"))
-                object.z = options.json && !isFinite(message.z) ? String(message.z) : message.z;
-            return object;
-        };
-    
-        /**
-         * Converts this Quat to JSON.
-         * @function toJSON
-         * @memberof Quat
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        Quat.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        /**
-         * Gets the default type url for Quat
-         * @function getTypeUrl
-         * @memberof Quat
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        Quat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/Quat";
-        };
-    
-        return Quat;
-    })();
-    
-    $root.HapticEvent = (function() {
-    
-        /**
-         * Properties of a HapticEvent.
-         * @exports IHapticEvent
-         * @interface IHapticEvent
-         * @property {HapticEvent.HapticType|null} [type] HapticEvent type
-         * @property {number|null} [intensity] HapticEvent intensity
-         * @property {number|null} [length] HapticEvent length
-         */
-    
-        /**
-         * Constructs a new HapticEvent.
-         * @exports HapticEvent
-         * @classdesc Represents a HapticEvent.
-         * @implements IHapticEvent
-         * @constructor
-         * @param {IHapticEvent=} [properties] Properties to set
-         */
-        function HapticEvent(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * HapticEvent type.
-         * @member {HapticEvent.HapticType} type
-         * @memberof HapticEvent
-         * @instance
-         */
-        HapticEvent.prototype.type = 0;
-    
-        /**
-         * HapticEvent intensity.
-         * @member {number} intensity
-         * @memberof HapticEvent
-         * @instance
-         */
-        HapticEvent.prototype.intensity = 0;
-    
-        /**
-         * HapticEvent length.
-         * @member {number} length
-         * @memberof HapticEvent
-         * @instance
-         */
-        HapticEvent.prototype.length = 0;
-    
-        /**
-         * Creates a new HapticEvent instance using the specified properties.
-         * @function create
-         * @memberof HapticEvent
-         * @static
-         * @param {IHapticEvent=} [properties] Properties to set
-         * @returns {HapticEvent} HapticEvent instance
-         */
-        HapticEvent.create = function create(properties) {
-            return new HapticEvent(properties);
-        };
-    
-        /**
-         * Encodes the specified HapticEvent message. Does not implicitly {@link HapticEvent.verify|verify} messages.
-         * @function encode
-         * @memberof HapticEvent
-         * @static
-         * @param {IHapticEvent} message HapticEvent message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        HapticEvent.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
-            if (message.intensity != null && Object.hasOwnProperty.call(message, "intensity"))
-                writer.uint32(/* id 2, wireType 5 =*/21).float(message.intensity);
-            if (message.length != null && Object.hasOwnProperty.call(message, "length"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.length);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified HapticEvent message, length delimited. Does not implicitly {@link HapticEvent.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof HapticEvent
-         * @static
-         * @param {IHapticEvent} message HapticEvent message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        HapticEvent.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a HapticEvent message from the specified reader or buffer.
-         * @function decode
-         * @memberof HapticEvent
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {HapticEvent} HapticEvent
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        HapticEvent.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HapticEvent();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.type = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.intensity = reader.float();
-                        break;
-                    }
-                case 3: {
-                        message.length = reader.int32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a HapticEvent message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof HapticEvent
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {HapticEvent} HapticEvent
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        HapticEvent.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a HapticEvent message.
-         * @function verify
-         * @memberof HapticEvent
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        HapticEvent.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.type != null && message.hasOwnProperty("type"))
-                switch (message.type) {
-                default:
-                    return "type: enum value expected";
-                case 0:
-                case 1:
-                    break;
-                }
-            if (message.intensity != null && message.hasOwnProperty("intensity"))
-                if (typeof message.intensity !== "number")
-                    return "intensity: number expected";
-            if (message.length != null && message.hasOwnProperty("length"))
-                if (!$util.isInteger(message.length))
-                    return "length: integer expected";
-            return null;
-        };
-    
-        /**
-         * Creates a HapticEvent message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof HapticEvent
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {HapticEvent} HapticEvent
-         */
-        HapticEvent.fromObject = function fromObject(object) {
-            if (object instanceof $root.HapticEvent)
-                return object;
-            var message = new $root.HapticEvent();
-            switch (object.type) {
-            default:
-                if (typeof object.type === "number") {
-                    message.type = object.type;
-                    break;
-                }
-                break;
-            case "CANCEL":
-            case 0:
-                message.type = 0;
-                break;
-            case "ONESHOT":
-            case 1:
-                message.type = 1;
-                break;
-            }
-            if (object.intensity != null)
-                message.intensity = Number(object.intensity);
-            if (object.length != null)
-                message.length = object.length | 0;
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a HapticEvent message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof HapticEvent
-         * @static
-         * @param {HapticEvent} message HapticEvent
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        HapticEvent.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.type = options.enums === String ? "CANCEL" : 0;
-                object.intensity = 0;
-                object.length = 0;
-            }
-            if (message.type != null && message.hasOwnProperty("type"))
-                object.type = options.enums === String ? $root.HapticEvent.HapticType[message.type] === undefined ? message.type : $root.HapticEvent.HapticType[message.type] : message.type;
-            if (message.intensity != null && message.hasOwnProperty("intensity"))
-                object.intensity = options.json && !isFinite(message.intensity) ? String(message.intensity) : message.intensity;
-            if (message.length != null && message.hasOwnProperty("length"))
-                object.length = message.length;
-            return object;
-        };
-    
-        /**
-         * Converts this HapticEvent to JSON.
-         * @function toJSON
-         * @memberof HapticEvent
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        HapticEvent.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        /**
-         * Gets the default type url for HapticEvent
-         * @function getTypeUrl
-         * @memberof HapticEvent
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        HapticEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HapticEvent";
-        };
-    
-        /**
-         * HapticType enum.
-         * @name HapticEvent.HapticType
-         * @enum {number}
-         * @property {number} CANCEL=0 CANCEL value
-         * @property {number} ONESHOT=1 ONESHOT value
-         */
-        HapticEvent.HapticType = (function() {
-            var valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[0] = "CANCEL"] = 0;
-            values[valuesById[1] = "ONESHOT"] = 1;
-            return values;
-        })();
-    
-        return HapticEvent;
-    })();
-    
-    $root.ClientInfo = (function() {
-    
-        /**
-         * Properties of a ClientInfo.
-         * @exports IClientInfo
-         * @interface IClientInfo
-         * @property {string|null} [appName] ClientInfo appName
-         * @property {string|null} [deviceName] ClientInfo deviceName
-         * @property {string|null} [title] ClientInfo title
-         * @property {string|null} [os] ClientInfo os
-         */
-    
-        /**
-         * Constructs a new ClientInfo.
-         * @exports ClientInfo
-         * @classdesc Represents a ClientInfo.
-         * @implements IClientInfo
-         * @constructor
-         * @param {IClientInfo=} [properties] Properties to set
-         */
-        function ClientInfo(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * ClientInfo appName.
-         * @member {string} appName
-         * @memberof ClientInfo
-         * @instance
-         */
-        ClientInfo.prototype.appName = "";
-    
-        /**
-         * ClientInfo deviceName.
-         * @member {string} deviceName
-         * @memberof ClientInfo
-         * @instance
-         */
-        ClientInfo.prototype.deviceName = "";
-    
-        /**
-         * ClientInfo title.
-         * @member {string} title
-         * @memberof ClientInfo
-         * @instance
-         */
-        ClientInfo.prototype.title = "";
-    
-        /**
-         * ClientInfo os.
-         * @member {string} os
-         * @memberof ClientInfo
-         * @instance
-         */
-        ClientInfo.prototype.os = "";
-    
-        /**
-         * Creates a new ClientInfo instance using the specified properties.
-         * @function create
-         * @memberof ClientInfo
-         * @static
-         * @param {IClientInfo=} [properties] Properties to set
-         * @returns {ClientInfo} ClientInfo instance
-         */
-        ClientInfo.create = function create(properties) {
-            return new ClientInfo(properties);
-        };
-    
-        /**
-         * Encodes the specified ClientInfo message. Does not implicitly {@link ClientInfo.verify|verify} messages.
-         * @function encode
-         * @memberof ClientInfo
-         * @static
-         * @param {IClientInfo} message ClientInfo message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        ClientInfo.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.appName != null && Object.hasOwnProperty.call(message, "appName"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.appName);
-            if (message.deviceName != null && Object.hasOwnProperty.call(message, "deviceName"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deviceName);
-            if (message.title != null && Object.hasOwnProperty.call(message, "title"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
-            if (message.os != null && Object.hasOwnProperty.call(message, "os"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.os);
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified ClientInfo message, length delimited. Does not implicitly {@link ClientInfo.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof ClientInfo
-         * @static
-         * @param {IClientInfo} message ClientInfo message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        ClientInfo.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes a ClientInfo message from the specified reader or buffer.
-         * @function decode
-         * @memberof ClientInfo
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {ClientInfo} ClientInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        ClientInfo.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ClientInfo();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.appName = reader.string();
-                        break;
-                    }
-                case 2: {
-                        message.deviceName = reader.string();
-                        break;
-                    }
-                case 3: {
-                        message.title = reader.string();
-                        break;
-                    }
-                case 4: {
-                        message.os = reader.string();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes a ClientInfo message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof ClientInfo
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {ClientInfo} ClientInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        ClientInfo.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies a ClientInfo message.
-         * @function verify
-         * @memberof ClientInfo
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        ClientInfo.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.appName != null && message.hasOwnProperty("appName"))
-                if (!$util.isString(message.appName))
-                    return "appName: string expected";
-            if (message.deviceName != null && message.hasOwnProperty("deviceName"))
-                if (!$util.isString(message.deviceName))
-                    return "deviceName: string expected";
-            if (message.title != null && message.hasOwnProperty("title"))
-                if (!$util.isString(message.title))
-                    return "title: string expected";
-            if (message.os != null && message.hasOwnProperty("os"))
-                if (!$util.isString(message.os))
-                    return "os: string expected";
-            return null;
-        };
-    
-        /**
-         * Creates a ClientInfo message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof ClientInfo
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {ClientInfo} ClientInfo
-         */
-        ClientInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.ClientInfo)
-                return object;
-            var message = new $root.ClientInfo();
-            if (object.appName != null)
-                message.appName = String(object.appName);
-            if (object.deviceName != null)
-                message.deviceName = String(object.deviceName);
-            if (object.title != null)
-                message.title = String(object.title);
-            if (object.os != null)
-                message.os = String(object.os);
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from a ClientInfo message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof ClientInfo
-         * @static
-         * @param {ClientInfo} message ClientInfo
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        ClientInfo.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.appName = "";
-                object.deviceName = "";
-                object.title = "";
-                object.os = "";
-            }
-            if (message.appName != null && message.hasOwnProperty("appName"))
-                object.appName = message.appName;
-            if (message.deviceName != null && message.hasOwnProperty("deviceName"))
-                object.deviceName = message.deviceName;
-            if (message.title != null && message.hasOwnProperty("title"))
-                object.title = message.title;
-            if (message.os != null && message.hasOwnProperty("os"))
-                object.os = message.os;
-            return object;
-        };
-    
-        /**
-         * Converts this ClientInfo to JSON.
-         * @function toJSON
-         * @memberof ClientInfo
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        ClientInfo.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        /**
-         * Gets the default type url for ClientInfo
-         * @function getTypeUrl
-         * @memberof ClientInfo
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        ClientInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/ClientInfo";
-        };
-    
-        return ClientInfo;
-    })();
-    
-    $root.InputUpdate = (function() {
-    
-        /**
-         * Properties of an InputUpdate.
-         * @exports IInputUpdate
-         * @interface IInputUpdate
-         * @property {IHapticEvent|null} [hapticEvent] InputUpdate hapticEvent
-         * @property {IClientInfo|null} [clientInfo] InputUpdate clientInfo
-         */
-    
-        /**
-         * Constructs a new InputUpdate.
-         * @exports InputUpdate
-         * @classdesc Represents an InputUpdate.
-         * @implements IInputUpdate
-         * @constructor
-         * @param {IInputUpdate=} [properties] Properties to set
-         */
-        function InputUpdate(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-    
-        /**
-         * InputUpdate hapticEvent.
-         * @member {IHapticEvent|null|undefined} hapticEvent
-         * @memberof InputUpdate
-         * @instance
-         */
-        InputUpdate.prototype.hapticEvent = null;
-    
-        /**
-         * InputUpdate clientInfo.
-         * @member {IClientInfo|null|undefined} clientInfo
-         * @memberof InputUpdate
-         * @instance
-         */
-        InputUpdate.prototype.clientInfo = null;
-    
-        /**
-         * Creates a new InputUpdate instance using the specified properties.
-         * @function create
-         * @memberof InputUpdate
-         * @static
-         * @param {IInputUpdate=} [properties] Properties to set
-         * @returns {InputUpdate} InputUpdate instance
-         */
-        InputUpdate.create = function create(properties) {
-            return new InputUpdate(properties);
-        };
-    
-        /**
-         * Encodes the specified InputUpdate message. Does not implicitly {@link InputUpdate.verify|verify} messages.
-         * @function encode
-         * @memberof InputUpdate
-         * @static
-         * @param {IInputUpdate} message InputUpdate message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        InputUpdate.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.hapticEvent != null && Object.hasOwnProperty.call(message, "hapticEvent"))
-                $root.HapticEvent.encode(message.hapticEvent, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.clientInfo != null && Object.hasOwnProperty.call(message, "clientInfo"))
-                $root.ClientInfo.encode(message.clientInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            return writer;
-        };
-    
-        /**
-         * Encodes the specified InputUpdate message, length delimited. Does not implicitly {@link InputUpdate.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof InputUpdate
-         * @static
-         * @param {IInputUpdate} message InputUpdate message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        InputUpdate.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-    
-        /**
-         * Decodes an InputUpdate message from the specified reader or buffer.
-         * @function decode
-         * @memberof InputUpdate
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {InputUpdate} InputUpdate
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        InputUpdate.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.InputUpdate();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.hapticEvent = $root.HapticEvent.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 2: {
-                        message.clientInfo = $root.ClientInfo.decode(reader, reader.uint32());
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-    
-        /**
-         * Decodes an InputUpdate message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof InputUpdate
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {InputUpdate} InputUpdate
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        InputUpdate.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-    
-        /**
-         * Verifies an InputUpdate message.
-         * @function verify
-         * @memberof InputUpdate
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        InputUpdate.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.hapticEvent != null && message.hasOwnProperty("hapticEvent")) {
-                var error = $root.HapticEvent.verify(message.hapticEvent);
-                if (error)
-                    return "hapticEvent." + error;
-            }
-            if (message.clientInfo != null && message.hasOwnProperty("clientInfo")) {
-                var error = $root.ClientInfo.verify(message.clientInfo);
-                if (error)
-                    return "clientInfo." + error;
-            }
-            return null;
-        };
-    
-        /**
-         * Creates an InputUpdate message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof InputUpdate
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {InputUpdate} InputUpdate
-         */
-        InputUpdate.fromObject = function fromObject(object) {
-            if (object instanceof $root.InputUpdate)
-                return object;
-            var message = new $root.InputUpdate();
-            if (object.hapticEvent != null) {
-                if (typeof object.hapticEvent !== "object")
-                    throw TypeError(".InputUpdate.hapticEvent: object expected");
-                message.hapticEvent = $root.HapticEvent.fromObject(object.hapticEvent);
-            }
-            if (object.clientInfo != null) {
-                if (typeof object.clientInfo !== "object")
-                    throw TypeError(".InputUpdate.clientInfo: object expected");
-                message.clientInfo = $root.ClientInfo.fromObject(object.clientInfo);
-            }
-            return message;
-        };
-    
-        /**
-         * Creates a plain object from an InputUpdate message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof InputUpdate
-         * @static
-         * @param {InputUpdate} message InputUpdate
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        InputUpdate.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.hapticEvent = null;
-                object.clientInfo = null;
-            }
-            if (message.hapticEvent != null && message.hasOwnProperty("hapticEvent"))
-                object.hapticEvent = $root.HapticEvent.toObject(message.hapticEvent, options);
-            if (message.clientInfo != null && message.hasOwnProperty("clientInfo"))
-                object.clientInfo = $root.ClientInfo.toObject(message.clientInfo, options);
-            return object;
-        };
-    
-        /**
-         * Converts this InputUpdate to JSON.
-         * @function toJSON
-         * @memberof InputUpdate
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        InputUpdate.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-    
-        /**
-         * Gets the default type url for InputUpdate
-         * @function getTypeUrl
-         * @memberof InputUpdate
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        InputUpdate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/InputUpdate";
-        };
-    
-        return InputUpdate;
     })();
 
     return $root;

@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://cdn.jsdelivr.net/npm/touch-sdk@0.5.2/dist/main.js"></script>
-		<script src="../node_modules/osc-js/lib/osc.min.js"></script>
-		<link rel="stylesheet" href="../node_modules/uplot/dist/uPlot.min.css">
-		<script src="../node_modules/uplot/dist/uPlot.iife.min.js"></script>
+        <script src="../../dist/main.js"></script>
+		<script src="../../node_modules/osc-js/lib/osc.min.js"></script>
+		<link href="../../node_modules/uplot/dist/uPlot.min.css" rel="stylesheet" >
+		<script src="../../node_modules/uplot/dist/uPlot.iife.min.js"></script>
 
-		<link href="../src/css/fontawesome.min.css" rel="stylesheet" />
-		<link href="../src/css/regular.min.css" rel="stylesheet" />
-		<link href="../src/css/solid.min.css" rel="stylesheet" />
+		<link href="../../src/css/fontawesome.min.css" rel="stylesheet" />
+		<link href="../../src/css/regular.min.css" rel="stylesheet" />
+		<link href="../../src/css/solid.min.css" rel="stylesheet" />
 		
-		<link rel="stylesheet" href="../src/style.css">
+		<link href="../../src/style.css" rel="stylesheet" >
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<link rel="apple-touch-icon" sizes="180x180" href="../src/favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="../src/favicon/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="../src/favicon/favicon-16x16.png">
-		<link rel="manifest" href="../src/favicon/site.webmanifest">
-		<link rel="mask-icon" href="../src/favicon/safari-pinned-tab.svg" color="#5bbad5">
-		<link rel="shortcut icon" href="../src/favicon/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="../../src/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../../src/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../../src/favicon/favicon-16x16.png">
+		<link rel="manifest" href="../../src/favicon/site.webmanifest">
+		<link rel="mask-icon" href="../../src/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="../../src/favicon/favicon.ico">
 		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="msapplication-config" content="../src/favicon/browserconfig.xml">
+		<meta name="msapplication-config" content="../../src/favicon/browserconfig.xml">
 		<meta name="theme-color" content="#ffffff">
 
 
@@ -63,8 +63,8 @@
 		
 		</div>
 		
-		<object id="doublepointLogo" type="image/svg+xml" data="../src/images/2pt_logo_train_light.svg">
-			<img src="../src/images/2pt_logo_train_light.png" />
+		<object id="doublepointLogo" type="image/svg+xml" data="../../src/images/2pt_logo_train_light.svg">
+			<img src="../../src/images/2pt_logo_train_light.png" />
 		  </object>
 		<div id="chartContainer">
 			<div id="chart"></div>
@@ -103,6 +103,11 @@
 				</tr>
 			</thead>
 			<tbody id="tableOutput">
+				<tr onclick="document.getElementById('probabilityOscSend').click()" id="probabilityRow">
+					<td><input type="checkbox" id="probabilityOscSend" checked onclick="event.stopPropagation();"></td>
+					<td>Probability</td>
+					<td id="probabilityDetails">Pinch and hold finger and thumb together to see the pinch probability value</td>
+		
 				<tr onclick="document.getElementById('tapOscSend').click()" id="tapRow">
 					<td><input type="checkbox" id="tapOscSend" checked onclick="event.stopPropagation();"></td>
 					<td>Tap</td>
@@ -139,7 +144,7 @@
 					<td>Gravity Vector</td>
 					<td id="gravityVectorChangedDetails"></td>
 				</tr>
-		
+				
 			</tbody>
 		</table>
 		
@@ -173,7 +178,22 @@
 			
 			});
 
+
+			// Data cut off threshold
+			const threshold = 200;
+
+			function trimDataToThreshold(data) {
+				return data.map(series => {
+					if (series.length > threshold) {
+						// Keep only the last 'threshold' number of elements
+						return series.slice(-threshold);
+					}
+					return series;
+				});
+			}
+
 			let data = [
+				[],  // Placeholder for the y-axis (probability)
 				[], // Placeholder for the x-axis (time or sequence)
 				[],  // Placeholder for the y-axis (acceleration x-component)
 				[],  // Placeholder for the y-axis (acceleration y-component)
@@ -185,14 +205,24 @@
 				[],  // Placeholder for the y-axis (gravity vector y-component)
 				[],  // Placeholder for the y-axis (gravity vector z-component)
 				[],  // Placeholder for the y-axis (arm orientation dx-component)
-				[]  // Placeholder for the y-axis (arm orientation dy-component)
+				[],  // Placeholder for the y-axis (arm orientation dy-component)
+				
 			];
 
 			const opts = {
 				width: 1380,
 				height: 300,
+				scales: {
+					x: {
+						time: false,
+					},
+					y: {
+						range: [-40, 40], // Adjust based on expected acceleration range
+					},
+				},
 				series: [
 					{},
+					
 					{
 						label: "Acc X",
 						stroke: "orange",
@@ -236,17 +266,15 @@
 					{
 						label: "Arm Y",
 						stroke: "pink",
-					}
+					},
+					{
+						label: "Prob",
+						stroke: "red",
+					}		
+
 				],
 
-				scales: {
-					x: {
-						time: false,
-					},
-					y: {
-						range: [-15, 15], // Adjust based on expected acceleration range
-					},
-				},
+				
 			};
 
 			let uplotChart = new uPlot(opts, data, document.getElementById('chart'));
@@ -377,6 +405,7 @@
 				// Reinitialize the data array with empty arrays for each series
 				data = [
 					[], // Placeholder for the x-axis (time or sequence)
+					[], // Placeholder for the y-axis (probability)
 					[], // Placeholder for the y-axis (acceleration x-component)
 					[], // Placeholder for the y-axis (acceleration y-component)
 					[], // Placeholder for the y-axis (acceleration z-component)
@@ -387,7 +416,7 @@
 					[], // Placeholder for the y-axis (gravity vector y-component)
 					[], // Placeholder for the y-axis (gravity vector z-component)
 					[], // Placeholder for the y-axis (arm orientation dx-component)
-					[]  // Placeholder for the y-axis (arm orientation dy-component)
+					[]  // Placeholder for the y-axis (arm orientation dy-component)					
 				];
 
 				// Reset the uPlot chart with the newly initialized data array
@@ -403,6 +432,7 @@
 				}, 0);
 			}
 			
+
 			watch.addEventListener('tap', () => {
 				tapCount++;
 				
@@ -454,6 +484,8 @@
 
 			
 
+			
+
 			watch.addEventListener('accelerationchanged', (event) => {
 				if (event.detail) {
 					const { x, y, z } = event.detail;
@@ -467,9 +499,11 @@
 						updateDetails('accelerationChanged', `x: ${x}, y: ${y}, z: ${z}`);
 						osc.send(new OSC.Message('/acc',x, y, z));
 					}
-
-					if (uPlotPaused) return;
-					uplotChart.setData(data);
+					
+					let trimmedData = trimDataToThreshold(data);
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
 				}
 			});
 
@@ -484,8 +518,11 @@
 						updateDetails('angularVelocityChanged', `x: ${x}, y: ${y}, z: ${z}`);
 						osc.send(new OSC.Message('/angVel', x, y, z));
 					}
-					if (uPlotPaused) return;
-					uplotChart.setData(data);
+					
+					let trimmedData = trimDataToThreshold(data);
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
 				}
 			});
 
@@ -500,8 +537,11 @@
 						updateDetails('gravityVectorChanged', `x: ${x}, y: ${y}, z: ${z}`);
 						osc.send(new OSC.Message('/grav', x, y, z));
 					}
-					if (uPlotPaused) return;
-					uplotChart.setData(data);
+					
+					let trimmedData = trimDataToThreshold(data);
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
 				}
 			});
 
@@ -516,8 +556,29 @@
 						updateDetails('armDirectionChanged', `dx: ${dx}, dy: ${dy}`);
 						osc.send(new OSC.Message('/arm', dx, dy));
 					}
-					if (uPlotPaused) return;
-					uplotChart.setData(data);
+					
+					let trimmedData = trimDataToThreshold(data);
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
+				}
+			});
+
+			watch.addEventListener('probability', (event) => {
+				if (event.detail) {
+					const probability = event.detail;
+					
+					data[12].push(probability*30); 
+					
+					if (shouldSendOscMessage('probability')) {
+						updateDetails('probability', probability);
+						osc.send(new OSC.Message('/prob', probability));
+					}
+					let trimmedData = trimDataToThreshold(data);
+
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
 				}
 			});
 			

@@ -171,7 +171,7 @@ td {
     margin-top: 2em;
     flex-direction: row-reverse;
     justify-content: flex-end;
-    overflow-x: auto; /* Enables horizontal scrolling */
+    overflow-x: auto; /* Enables horizontal scrolling */    
     overflow-y: hidden; /* Disables vertical scrolling */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
     width: 100%; /* Ensures the container fits within the viewport width */
@@ -192,7 +192,7 @@ td {
 
 .uplot canvas{
     background-color: #3c3c3f;
-    padding: 2em 2em .8em 1em;
+    padding: 2em 0em .8em 1em;
     border-radius: 5px 5px 0 0;
 }
 
@@ -229,6 +229,7 @@ td.u-value{
 
 .u-label{
     font-weight: normal;
+    font-size: .8em;
 }
 
 @media (max-width: 1440px) {
