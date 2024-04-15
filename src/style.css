@@ -5,22 +5,23 @@ body {
     padding: 40px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0 auto; /* Center the content */
     max-width: 1380px; /* Constrain width to plot size and center */
 
 }
 table {
     border-collapse: collapse;
-    width: auto;
+    /* width: auto; */
     background-color: #2d2d2d;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     overflow: hidden;
 }
+
 th, td {
     text-align: left;
-    padding: 12px;
+    padding: 20px;
     color: #dcdcdc;
 }
 th {
@@ -86,16 +87,18 @@ input[type="checkbox"] {
 tr:hover {
     background-color: #434245;
     th {
-        background-color: #434245;
+        background-color: #0078d4;
     }
 }
-th:nth-child(1), td:nth-child(1),
+
+
+/* th:nth-child(1), td:nth-child(1),
 th:nth-child(2), td:nth-child(2) {
     white-space: nowrap;
-}
-th:nth-child(3), td:nth-child(3) {
+} */
+/* th:nth-child(3), td:nth-child(3) {
     width: 100%;
-}
+} */
 
 #doublepointLogo {
     width: 230px;
@@ -152,7 +155,10 @@ button.reset:hover, button.pausePlay:hover {
 
 /* Fixed height for connection status row */
 td {
-    height: 60px;
+    height: 40px;
+}
+table td:first-child {
+    width: 200px;
 }
 .intro {
     text-align: left;

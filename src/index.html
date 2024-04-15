@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../dist/main.js"></script>
-		<script src="../node_modules/osc-js/lib/osc.min.js"></script>
-		<link href="../node_modules/uplot/dist/uPlot.min.css" rel="stylesheet" >
-		<script src="../node_modules/uplot/dist/uPlot.iife.min.js"></script>
+        <script src="../../dist/main.js"></script>
+		<link href="../../node_modules/uplot/dist/uPlot.min.css" rel="stylesheet" >
+		<script src="../../node_modules/uplot/dist/uPlot.iife.min.js"></script>
 
-		<link href="../src/css/fontawesome.min.css" rel="stylesheet" />
-		<link href="../src/css/regular.min.css" rel="stylesheet" />
-		<link href="../src/css/solid.min.css" rel="stylesheet" />
+		<link href="../../src/css/fontawesome.min.css" rel="stylesheet" />
+		<link href="../../src/css/regular.min.css" rel="stylesheet" />
+		<link href="../../src/css/solid.min.css" rel="stylesheet" />
 		
-		<link href="../src/style.css" rel="stylesheet" >
+		<link href="../../src/style.css" rel="stylesheet" >
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<link rel="apple-touch-icon" sizes="180x180" href="../src/favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="../src/favicon/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="../src/favicon/favicon-16x16.png">
-		<link rel="manifest" href="../src/favicon/site.webmanifest">
-		<link rel="mask-icon" href="../src/favicon/safari-pinned-tab.svg" color="#5bbad5">
-		<link rel="shortcut icon" href="../src/favicon/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="../../src/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../../src/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../../src/favicon/favicon-16x16.png">
+		<link rel="manifest" href="../../src/favicon/site.webmanifest">
+		<link rel="mask-icon" href="../../src/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="../../src/favicon/favicon.ico">
 		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="msapplication-config" content="../src/favicon/browserconfig.xml">
+		<meta name="msapplication-config" content="../../src/favicon/browserconfig.xml">
 		<meta name="theme-color" content="#ffffff">
 
 
 		<!-- HTML Meta Tags -->
 		<title>Touch SDK Monitor by Doublepoint</title>
-		<meta name="description" content="Receive smartwatch IMU data stream and touch events through chrome browser and send it via OSC to programs such as MaxMSP or Touchdesigner.">
+		<meta name="description" content="Receive smartwatch IMU data stream and touch events through chrome browser.">
 
 		<!-- Facebook Meta Tags -->
-		<meta property="og:url" content="https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html">
+		<meta property="og:url" content="https://playground.doublepoint.com/monitor/index.html">
 		<meta property="og:type" content="website">
 		<meta property="og:title" content="Touch SDK Monitor by Doublepoint">
-		<meta property="og:description" content="Receive smartwatch IMU data stream and touch events through chrome browser and send it via OSC to programs such as MaxMSP or Touchdesigner.">
-		<meta property="og:image" content="https://playground.doublepoint.com/plot/src/images/og-image.png">
+		<meta property="og:description" content="Receive smartwatch IMU data stream and touch events through chrome browser.">
+		<meta property="og:image" content="https://playground.doublepoint.com/monitor/src/images/og-image.png">
 		<!-- For the video -->
-		<meta property="og:video" content="https://playground.doublepoint.com/plot/src/images/og-video.mp4" />
+		<meta property="og:video" content="https://playground.doublepoint.com/monitor/src/images/og-video.mp4" />
 		<meta property="og:video:type" content="video/mp4" />
 		<meta property="og:video:width" content="1280" />
 		<meta property="og:video:height" content="720" />
@@ -44,10 +43,10 @@
 		<!-- Twitter Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image">
 		<meta property="twitter:domain" content="playground.doublepoint.com">
-		<meta property="twitter:url" content="https://playground.doublepoint.com/plot/examples/oscTouchSDK_monitor.html">
+		<meta property="twitter:url" content="https://playground.doublepoint.com/monitor/index.html">
 		<meta name="twitter:title" content="Touch SDK Monitor by Doublepoint">
-		<meta name="twitter:description" content="Receive smartwatch IMU data stream and touch events through chrome browser and send it via OSC to programs such as MaxMSP or Touchdesigner.">
-		<meta name="twitter:image" content="https://playground.doublepoint.com/plot/src/images/og-image.png">
+		<meta name="twitter:description" content="Receive smartwatch IMU data stream and touch events through chrome browser.">
+		<meta name="twitter:image" content="https://playground.doublepoint.com/monitor/src/images/og-image.png">
 
     </head>
     <body>
@@ -63,8 +62,8 @@
 		
 		</div>
 		
-		<object id="doublepointLogo" type="image/svg+xml" data="../src/images/2pt_logo_train_light.svg">
-			<img src="../src/images/2pt_logo_train_light.png" />
+		<object id="doublepointLogo" type="image/svg+xml" data="../../src/images/2pt_logo_train_light.svg">
+			<img src="../../src/images/2pt_logo_train_light.png" />
 		  </object>
 		<div id="chartContainer">
 			<div id="chart"></div>
@@ -76,71 +75,56 @@
 			<div>
 				<h1 style="color: #fff;">Touch SDK <br><span style="color: #0078d4; margin-top: 20px;">Monitor</span></h1>
 			
-				<h3>Receive smartwatch IMU data stream and touch events through any WebBLE browser and send it via OSC to programs such as MaxMSP or Touchdesigner. Reconnect or pause if you experience low framerate. Download the files for best performance. <br> <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a></h3>
+				<h3>Receive smartwatch IMU data stream and touch events through any WebBLE browser. Reconnect or pause if you experience low framerate. Download the files for best performance. <br> <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a></h3>
 					
-			</div>
-			
+			</div>			
 				<ol>
-					<li>To send OSC messages ensure OSC-Bridge is operational by running <br> <code style="color: #0078d4;">node &lt;pathToOscBridge.js&gt;</code>.</li>
-					<li>Refresh this page</li>
 					<li>Press Connect to pair Watch</li>
 					<li>Click on rows below to send only selected values</li>
-					<li>Move your arm, tap, rotate the dial, touch the screen, press back button to see the OSC messages on your other application</li>
+					<li>Move your arm, tap, pinch and hold, press back button to see changes</li>
 			
 				
-				</ol>
-					
-			<p>Address 127.0.0.1 <br>Port 5555 <br><br>
-			Set a different port by modifying oscBridge.js accordingly.</p>
-
+				</ol>					
+			
 		</section>
 		<table id="outputTable">
 			<thead>
 				<tr>
-					<th>OSC</th>
 					<th>Event</th>
 					<th>Details</th>
 				</tr>
 			</thead>
 			<tbody id="tableOutput">
-				<tr onclick="document.getElementById('probabilityOscSend').click()" id="probabilityRow">
-					<td><input type="checkbox" id="probabilityOscSend" checked onclick="event.stopPropagation();"></td>
+				<tr id="probabilityRow">
 					<td>Probability</td>
 					<td id="probabilityDetails">Pinch and hold finger and thumb together to see the pinch probability value</td>
 		
-				<tr onclick="document.getElementById('tapOscSend').click()" id="tapRow">
-					<td><input type="checkbox" id="tapOscSend" checked onclick="event.stopPropagation();"></td>
+				<tr id="tapRow">
 					<td>Tap</td>
 					<td id="tapDetails">Tap your finger and thumb together to increment the count</td>
 				</tr>
-				<tr onclick="document.getElementById('rotaryOscSend').click()" id="rotaryRow">
-					<td><input type="checkbox" id="rotaryOscSend" checked onclick="event.stopPropagation();"></td>
+				<tr id="rotaryRow">
 					<td>Rotary Step</td>
 					<td id="rotaryDetails">Rotate dial or crown to increment the count</td>
 					
 				</tr>
-				<tr onclick="document.getElementById('backButtonOscSend').click()"id="backRow">
-					<td><input type="checkbox" id="backButtonOscSend" checked onclick="event.stopPropagation();"></td>
+				<tr id="backRow">
 					<td>Back Button</td>
 					<td id="backButtonDetails">Press back button on your watch to increment the count</td>
 				</tr>
-				<tr onclick="document.getElementById('armDirectionChangedOscSend').click()" id="armDirectionRow">
-					<td><input type="checkbox" id="armDirectionChangedOscSend" onclick="event.stopPropagation();"></td>
+				<tr id="armDirectionRow">
 					<td>Arm Direction</td>
 					<td id="armDirectionChangedDetails"></td>
 				</tr>
-				<tr onclick="document.getElementById('accelerationChangedOscSend').click()" id="accelerationRow">
-					<td><input type="checkbox" id="accelerationChangedOscSend" onclick="event.stopPropagation();"></td>
+				<tr id="accelerationRow">
 					<td>Acceleration</td>
 					<td id="accelerationChangedDetails"></td>
 				</tr>
-				<tr onclick="document.getElementById('angularVelocityChangedOscSend').click()" id="angularVelocityRow">
-					<td><input type="checkbox" id="angularVelocityChangedOscSend" onclick="event.stopPropagation();"></td>
+				<tr id="angularVelocityRow">
 					<td>Angular Velocity</td>
 					<td id="angularVelocityChangedDetails"></td>
 				</tr>
-				<tr onclick="document.getElementById('gravityVectorChangedOscSend').click()" id="gravityVectorRow">
-					<td><input type="checkbox" id="gravityVectorChangedOscSend" onclick="event.stopPropagation();"></td>
+				<tr id="gravityVectorRow">
 					<td>Gravity Vector</td>
 					<td id="gravityVectorChangedDetails"></td>
 				</tr>
@@ -150,17 +134,6 @@
 		
 		<script>
 			
-			var osc = new OSC();
-			osc.open();
-			osc.on('open', () => {
-				console.log('Connected');
-			});
-
-			function shouldSendOscMessage(event) {
-				const checkbox = document.getElementById(`${event}OscSend`);
-				return checkbox && checkbox.checked;
-			}
-
 			const watch = new TouchSDK.Watch();
 			let buttonPressCount = 0;
 			let rotaryCount = 0;
@@ -430,25 +403,17 @@
 						document.getElementById(id).style.backgroundColor = '';
 					}, 100);
 				}, 0);
-			}
-			
+			}			
 
 			watch.addEventListener('tap', () => {
 				tapCount++;
-				
-				if (shouldSendOscMessage('tap')) {
-					updateDetails('tap', `${tapCount}`);
-					osc.send(new OSC.Message('/tap', tapCount)); // Updated to send OSC message as a Message object
-				}
+				updateDetails('tap', `${tapCount}`);				
 				changeBackgroundColor('tapRow');				
 			});
 
 			watch.addEventListener('button', () => {
 				buttonPressCount++;
-				if (shouldSendOscMessage('backButton')) {
-					updateDetails('backButton', `${buttonPressCount}`);
-			  		osc.send(new OSC.Message('/back', buttonPressCount));
-			  	}
+				updateDetails('backButton', `${buttonPressCount}`);
 				changeBackgroundColor('backRow');
 			});
 			
@@ -461,30 +426,19 @@
 					rotaryCount--;
 					direction = 'left';
 				}
-				if (shouldSendOscMessage('rotary')) {
-					updateDetails('rotary', `${rotaryCount}, Direction: ${direction}, Step: ${step}`);
-					osc.send(new OSC.Message('/rotary', rotaryCount, direction, step));
-			  	}
+				updateDetails('rotary', `${rotaryCount}, Direction: ${direction}, Step: ${step}`);				
 				changeBackgroundColor('rotaryRow');
 			});
 
 			watch.addEventListener('connectionstatuschanged', (event) => {
 				if (event.detail) {
 					const status = event.detail;
+					updateDetails('connectionStatus', `Status: ${status}`);					
 					
-					
-					if (shouldSendOscMessage('connectionStatus')) {
-						updateDetails('connectionStatus', `Status: ${status}`);
-						osc.send(new OSC.Message('/status', status));
-					}
 				} else {
 					console.error('Event detail is null');
 				}
-			});
-
-			
-
-			
+			});			
 
 			watch.addEventListener('accelerationchanged', (event) => {
 				if (event.detail) {
@@ -494,11 +448,7 @@
 					data[2].push(y); // Update with the y-component of acceleration
 					data[3].push(z); // Update with the z-component of acceleration
 					
-
-					if (shouldSendOscMessage('accelerationChanged')) {
-						updateDetails('accelerationChanged', `x: ${x}, y: ${y}, z: ${z}`);
-						osc.send(new OSC.Message('/acc',x, y, z));
-					}
+					updateDetails('accelerationChanged', `x: ${x}, y: ${y}, z: ${z}`);
 					
 					let trimmedData = trimDataToThreshold(data);
 					if (!uPlotPaused) {
@@ -513,12 +463,8 @@
 					data[4].push(x); // Update with the x-component of angular velocity
 					data[5].push(y); // Update with the y-component of angular velocity
 					data[6].push(z); // Update with the z-component of angular velocity
+					updateDetails('angularVelocityChanged', `x: ${x}, y: ${y}, z: ${z}`);
 				
-					if (shouldSendOscMessage('angularVelocityChanged')) {
-						updateDetails('angularVelocityChanged', `x: ${x}, y: ${y}, z: ${z}`);
-						osc.send(new OSC.Message('/angVel', x, y, z));
-					}
-					
 					let trimmedData = trimDataToThreshold(data);
 					if (!uPlotPaused) {
 						uplotChart.setData(trimmedData);
@@ -532,11 +478,7 @@
 					data[7].push(x); // Update with the x-component of angular velocity
 					data[8].push(y); // Update with the y-component of angular velocity
 					data[9].push(z); // Update with the z-component of angular velocity
-
-					if (shouldSendOscMessage('gravityVectorChanged')) {
-						updateDetails('gravityVectorChanged', `x: ${x}, y: ${y}, z: ${z}`);
-						osc.send(new OSC.Message('/grav', x, y, z));
-					}
+					updateDetails('gravityVectorChanged', `x: ${x}, y: ${y}, z: ${z}`);
 					
 					let trimmedData = trimDataToThreshold(data);
 					if (!uPlotPaused) {
@@ -550,13 +492,8 @@
 					const { dx, dy } = event.detail;
 					data[10].push(dx); // Update with the dx-component of arm direction
 					data[11].push(dy); // Update with the dy-component of arm direction
-				
-	
-					if (shouldSendOscMessage('armDirectionChanged')) {
-						updateDetails('armDirectionChanged', `dx: ${dx}, dy: ${dy}`);
-						osc.send(new OSC.Message('/arm', dx, dy));
-					}
-					
+					updateDetails('armDirectionChanged', `dx: ${dx}, dy: ${dy}`);
+						
 					let trimmedData = trimDataToThreshold(data);
 					if (!uPlotPaused) {
 						uplotChart.setData(trimmedData);
@@ -566,14 +503,9 @@
 
 			watch.addEventListener('probability', (event) => {
 				if (event.detail) {
-					const probability = event.detail;
-					
+					const probability = event.detail;					
 					data[12].push(probability*30); 
-					
-					if (shouldSendOscMessage('probability')) {
-						updateDetails('probability', probability);
-						osc.send(new OSC.Message('/prob', probability));
-					}
+					updateDetails('probability', probability);					
 					let trimmedData = trimDataToThreshold(data);
 
 					if (!uPlotPaused) {
