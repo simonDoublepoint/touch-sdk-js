@@ -1,0 +1,314 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    /* height: 100vh; */
+    margin: 0 auto; /* Center the content */
+    max-width: 1380px; /* Constrain width to plot size and center */
+
+}
+table {
+    border-collapse: collapse;
+    /* width: auto; */
+    background-color: #2d2d2d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+th, td {
+    text-align: left;
+    padding: 20px;
+    color: #dcdcdc;
+}
+th {
+    background-color: #0078d4;
+    color: #ffffff;
+}
+
+h1, h2, h3, p, ol {
+    margin: 0;
+}
+
+h1{
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+h2{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+
+h3{
+    font-size: 1.1em;
+    font-weight: normal;
+}
+
+a {
+    color: #0078d4;
+    text-decoration: none;
+}
+
+li, p, h3 {
+    line-height: 1.7em;
+}
+
+#loading{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    
+    opacity: 0;
+    z-index: 1000;
+}
+
+input[type="checkbox"] {
+    accent-color: #0078d4;
+    transform: scale(1.5); /* Makes checkboxes larger */
+    margin: 10px; /* Adds space around checkboxes for easier interaction */
+    cursor: pointer; /* Changes cursor to pointer to indicate clickable area */
+}
+tr:hover {
+    background-color: #434245;
+    th {
+        background-color: #0078d4;
+    }
+}
+
+
+/* th:nth-child(1), td:nth-child(1),
+th:nth-child(2), td:nth-child(2) {
+    white-space: nowrap;
+} */
+/* th:nth-child(3), td:nth-child(3) {
+    width: 100%;
+} */
+
+#doublepointLogo {
+    width: 230px;
+    padding: 1em 0;
+    display: block;
+    fill: #fff;
+}
+/* Style for connection button */
+button.connect, button.reconnect, button.reset, button.pausePlay {
+    font-size: 16px;
+    padding: 10px 20px;
+    width: 10em;
+    margin: 2em auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 2em;
+    right: 2em;
+}
+button.connect {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+button.connect:hover {
+    background-color: #45a049;
+}
+button.reconnect {
+    background-color: #4CAF50; /* Red */
+    color: white;
+}
+button.reconnect:hover {
+    background-color: #45a049;
+}
+
+button.reset {
+    right: 13em;
+}
+
+button.pausePlay {
+    right: 24em;
+}
+
+button.reset, button.pausePlay {
+    background-color: #414145; /* Blue */
+    color: white;
+    display: none;
+}
+
+button.reset:hover, button.pausePlay:hover {
+    background-color: #28282b   ;
+}
+
+/* Fixed height for connection status row */
+td {
+    height: 40px;
+}
+table td:first-child {
+    width: 200px;
+}
+.intro {
+    text-align: left;
+    display: flex; 
+    padding: 4em 0;
+}
+.intro p, .intro ol {
+    margin-left: 6em;
+    font-size: 1em;
+}
+
+
+
+#chartContainer, #chart {
+    display: flex;
+    margin-top: 2em;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    overflow-x: auto; /* Enables horizontal scrolling */    
+    overflow-y: hidden; /* Disables vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
+    width: 100%; /* Ensures the container fits within the viewport width */
+    min-height: 380px;
+    border-radius: 5px;
+}
+
+
+.u-legend{
+    background-color: #292929;
+    text-align: left;
+    border-radius: 0 0 5px 5px;
+}
+.u-legend th{
+    border:none;
+    background-color: #292929;
+}
+
+.uplot canvas{
+    background-color: #3c3c3f;
+    padding: 2em 0em .8em 1em;
+    border-radius: 5px 5px 0 0;
+}
+
+.u-legend .u-marker{
+    border-radius: 50px;
+    border-width: thick !important;
+    width: 10px;
+    height: 2px;
+}
+
+.u-inline th{
+    display: inline;
+    padding-left: 1em;
+}
+
+.u-inline tr{
+    margin: 0;
+}
+
+.u-value{
+    font-size: 1em;
+    width: 2em;
+    vertical-align: unset;
+}
+
+td.u-value{
+    height: auto;
+    padding: 1em 0;
+}
+
+.u-value::after {
+    content: round(attr(data-value));
+}
+
+.u-label{
+    font-weight: normal;
+    font-size: .8em;
+}
+
+@media (max-width: 1440px) {
+    #chart {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 800px) {
+    body {
+        padding: 20px; /* Reduced padding for smaller screens */
+    }
+
+    h1 {
+        font-size: 1.8em; /* Slightly smaller font size */
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    h3, p, li {
+        font-size: 0.9em; /* Adjust font size for readability */
+    }
+
+    .intro, .intro p, .intro ol {
+        margin-left: 0;
+        margin-top: 1em;
+    }
+    .intro {
+        flex-direction: column;
+    }
+
+    button.connect, button.reconnect, button.reset, button.pausePlay {
+        font-size: 14px;
+        padding: 15px 20px;
+        width: auto; /* Adjust width to fit content */
+        margin: 1em auto; /* Adjust margin */
+        top: 7em; /* Increase distance from the top */
+        right: auto; /* Reset the right alignment */    
+    }
+    button.connect {
+        left: 1.5em;        
+    }
+
+    button.reconnect {
+        left: 1.5em;
+    }
+    button.pausePlay {
+        left: 11em;
+    }
+
+    button.reset {
+        left: 18em;
+    }
+
+   
+
+    input[type="checkbox"] {
+        transform: scale(1.2); /* Slightly larger checkboxes */
+    }
+
+    .uplot canvas{
+        background-color: #3c3c3f;
+        padding: 2em .1em .8em .1em;
+        border-radius: 5px 5px 0 0;
+    }
+    
+}
+
+/* Additional media query for very small screens */
+@media (max-width: 480px) {
+    .intro {
+        flex-direction: column; /* Stack intro content vertically */
+    }
+}

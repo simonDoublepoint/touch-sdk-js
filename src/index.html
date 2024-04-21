@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../dist/main.js"></script>
+		<link href="../node_modules/uplot/dist/uPlot.min.css" rel="stylesheet" >
+		<script src="../node_modules/uplot/dist/uPlot.iife.min.js"></script>
+
+		<link href="../src/css/fontawesome.min.css" rel="stylesheet" />
+		<link href="../src/css/regular.min.css" rel="stylesheet" />
+		<link href="../src/css/solid.min.css" rel="stylesheet" />
+		
+		<link href="../src/style.css" rel="stylesheet" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+
+		<link rel="apple-touch-icon" sizes="180x180" href="../src/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../src/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../src/favicon/favicon-16x16.png">
+		<link rel="manifest" href="../src/favicon/site.webmanifest">
+		<link rel="mask-icon" href="../src/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="../src/favicon/favicon.ico">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="msapplication-config" content="../src/favicon/browserconfig.xml">
+		<meta name="theme-color" content="#ffffff">
+
+
+		<!-- HTML Meta Tags -->
+		<title>Touch SDK Monitor by Doublepoint</title>
+		<meta name="description" content="Receive smartwatch IMU data stream and touch events through chrome browser.">
+
+		<!-- Facebook Meta Tags -->
+		<meta property="og:url" content="https://playground.doublepoint.com/monitor/index.html">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="Touch SDK Monitor by Doublepoint">
+		<meta property="og:description" content="Receive smartwatch IMU data stream and touch events through chrome browser.">
+		<meta property="og:image" content="https://playground.doublepoint.com/monitor/src/images/og-image.png">
+		<!-- For the video -->
+		<meta property="og:video" content="https://playground.doublepoint.com/monitor/src/images/og-video.mp4" />
+		<meta property="og:video:type" content="video/mp4" />
+		<meta property="og:video:width" content="1280" />
+		<meta property="og:video:height" content="720" />
+
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta property="twitter:domain" content="playground.doublepoint.com">
+		<meta property="twitter:url" content="https://playground.doublepoint.com/monitor/index.html">
+		<meta name="twitter:title" content="Touch SDK Monitor by Doublepoint">
+		<meta name="twitter:description" content="Receive smartwatch IMU data stream and touch events through chrome browser.">
+		<meta name="twitter:image" content="https://playground.doublepoint.com/monitor/src/images/og-image.png">
+
+    </head>
+    <body>
+		<div id="loading">
+        	<h2>Connecting to your Watch... </h2>
+			<h3><a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">Download</a> the zip or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone</a> the repo for best performance.<br>
+			
+
+
+			<h3 id="countDown">4</h3>
+			<br><br><br>
+		<h3><a onclick="document.getElementById('loading').style.display = 'none';"><i class="fa-regular fa-times-circle"></i> Close</a></h3>
+		
+		</div>
+		
+		<object id="doublepointLogo" type="image/svg+xml" data="../src/images/2pt_logo_train_light.svg">
+			<img src="../src/images/2pt_logo_train_light.png" />
+		  </object>
+		<div id="chartContainer">
+			<div id="chart"></div>
+		</div>
+		<button class="reset" onclick="resetUPlotScriptAndValues()"><i class="fa-regular fa-arrow-rotate-right"></i> Reset</button>
+		<button class="pausePlay" onclick="pausePlayPlot()"><i class="fa-solid fa-pause"></i> Pause</button>
+		
+		<section class="intro" >	
+			<div>
+				<h1 style="color: #fff;">Touch SDK <br><span style="color: #0078d4; margin-top: 20px;">Monitor</span></h1>
+			
+				<h3>Receive smartwatch IMU data stream and touch events through any WebBLE browser. Reconnect or pause if you experience low framerate. Download the files for best performance. <br> <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a></h3>
+					
+			</div>			
+				<ol>
+					<li>Press Connect to pair Watch</li>
+					<li>Move your arm, tap, pinch and hold, press back button to see changes in the table below</li>
+			
+				
+				</ol>					
+			
+		</section>
+		<table id="outputTable">
+			<thead>
+				<tr>
+					<th>Event</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody id="tableOutput">
+				<tr id="probabilityRow">
+					<td>Probability</td>
+					<td id="probabilityDetails">Pinch and hold finger and thumb together to see the pinch probability value</td>
+		
+				<tr id="tapRow">
+					<td>Tap</td>
+					<td id="tapDetails">Tap your finger and thumb together to increment the count</td>
+				</tr>
+				<tr id="rotaryRow">
+					<td>Rotary Step</td>
+					<td id="rotaryDetails">Rotate dial or crown to increment the count</td>
+					
+				</tr>
+				<tr id="backRow">
+					<td>Back Button</td>
+					<td id="backButtonDetails">Press back button on your watch to increment the count</td>
+				</tr>
+				<tr id="armDirectionRow">
+					<td>Arm Direction</td>
+					<td id="armDirectionChangedDetails"></td>
+				</tr>
+				<tr id="accelerationRow">
+					<td>Acceleration</td>
+					<td id="accelerationChangedDetails"></td>
+				</tr>
+				<tr id="angularVelocityRow">
+					<td>Angular Velocity</td>
+					<td id="angularVelocityChangedDetails"></td>
+				</tr>
+				<tr id="gravityVectorRow">
+					<td>Gravity Vector</td>
+					<td id="gravityVectorChangedDetails"></td>
+				</tr>
+				
+			</tbody>
+		</table>
+		
+		<script>
+			
+			const watch = new TouchSDK.Watch();
+			let buttonPressCount = 0;
+			let rotaryCount = 0;
+			let tapCount = 0;
+			let direction = 'none';
+
+			// get first <object>
+			const objTag = document.querySelector('object');
+
+			// wait for SVG to load
+			objTag.addEventListener('load', () => {
+
+			// reference to SVG document
+			const svg = objTag.getSVGDocument();
+			
+			});
+
+
+			// Data cut off threshold
+			const threshold = 200;
+
+			function trimDataToThreshold(data) {
+				return data.map(series => {
+					if (series.length > threshold) {
+						// Keep only the last 'threshold' number of elements
+						return series.slice(-threshold);
+					}
+					return series;
+				});
+			}
+
+			let data = [
+				[],  // Placeholder for the y-axis (probability)
+				[], // Placeholder for the x-axis (time or sequence)
+				[],  // Placeholder for the y-axis (acceleration x-component)
+				[],  // Placeholder for the y-axis (acceleration y-component)
+				[],  // Placeholder for the y-axis (acceleration z-component)
+				[],  // Placeholder for the y-axis (angular velocity x-component)
+				[],  // Placeholder for the y-axis (angular velocity y-component)
+				[],  // Placeholder for the y-axis (angular velocity z-component)
+				[],  // Placeholder for the y-axis (gravity vector x-component)
+				[],  // Placeholder for the y-axis (gravity vector y-component)
+				[],  // Placeholder for the y-axis (gravity vector z-component)
+				[],  // Placeholder for the y-axis (arm orientation dx-component)
+				[],  // Placeholder for the y-axis (arm orientation dy-component)
+				
+			];
+
+			const opts = {
+				width: 1380,
+				height: 300,
+				scales: {
+					x: {
+						time: false,
+					},
+					y: {
+						range: [-40, 40], // Adjust based on expected acceleration range
+					},
+				},
+				series: [
+					{},
+					
+					{
+						label: "Acc X",
+						stroke: "orange",
+					},
+					{
+						label: "Acc Y",
+						stroke: "darkorange",
+					},
+					{
+						label: "Acc Z",
+						stroke: "yellow",
+					},
+					{
+						label: "AngVel X",
+						stroke: "blue",
+					},
+					{
+						label: "AngVel Y",
+						stroke: "darkblue",
+					},
+					{
+						label: "AngVel Z",
+						stroke: "lightblue",
+					},
+					{
+						label: "Grav X",
+						stroke: "green",
+					},
+					{
+						label: "Grav Y",
+						stroke: "darkgreen",
+					},
+					{
+						label: "Grav Z",
+						stroke: "lightgreen",
+					},
+					{
+						label: "Arm X",
+						stroke: "purple",
+					},
+					{
+						label: "Arm Y",
+						stroke: "pink",
+					},
+					{
+						label: "Prob",
+						stroke: "red",
+					}		
+
+				],
+
+				
+			};
+
+			let uplotChart = new uPlot(opts, data, document.getElementById('chart'));
+
+			let uPlotPaused = false;
+			function pausePlayPlot() {
+				uPlotPaused = !uPlotPaused;
+				if (uPlotPaused) {					
+					document.querySelector('.pausePlay').innerHTML = '<i class="fa-solid fa-play"></i> Play';
+				} else {					
+					document.querySelector('.pausePlay').innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+				}
+			}
+
+			// Update details in the table
+			function updateDetails(event, details) {
+			  const element = document.getElementById(`${event}Details`);
+			  if (element) {
+				element.textContent = details;
+			  } else {
+				console.error(`Element with id ${event}Details not found`);
+			  }
+			}
+			
+			// Handle requestConnection on button click
+			const connectButton = document.createElement('button');
+			connectButton.innerHTML = '<i class="fa-regular fa-watch"></i> Connect';
+			connectButton.className = 'connect';
+			document.body.appendChild(connectButton);
+			
+			let reconnectButton = document.createElement('button');
+			reconnectButton.innerHTML = '<i class="fa-regular fa-watch"></i> Reconnect';
+			reconnectButton.className = 'reconnect';
+			reconnectButton.style.display = 'none'; // Initially hidden
+			document.body.appendChild(reconnectButton);
+			
+			
+			
+
+			reconnectButton.addEventListener('click', () => {
+				handleReconnection();
+			});
+					
+
+			// Handle Reconnection on button click
+			async function handleReconnection() {
+				try {
+
+					await watch.disconnect();
+					resetDetails();
+					
+					document.querySelector('.reset').style.display = 'none';
+					document.querySelector('.pausePlay').style.display = 'none';
+
+					connectButton.style.display = 'inline';
+					reconnectButton.style.display = 'none';
+
+					setTimeout(() => {
+						 handleConnection(); 
+					}, 1000);					
+				} catch (error) {
+					console.error(error.message);
+				}
+			}
+
+			// Handle requestConnection on button click
+			async function handleConnection() {
+				try {
+					document.getElementById('loading').style.display = 'flex';
+					document.getElementById('loading').style.backdropFilter = 'blur(10px)';
+					document.getElementById('loading').style.opacity = '100';
+					document.getElementById('countDown').style.opacity = '0';
+					document.getElementById('countDown').textContent = '4';	
+					await watch.requestConnection();
+					document.getElementById('countDown').style.opacity = '100';
+
+					document.querySelector('.reset').style.display = 'inline';
+					document.querySelector('.pausePlay').style.display = 'inline';
+					
+					connectButton.style.display = 'none';
+					reconnectButton.style.display = 'inline';
+					startCountdown();
+				} catch (error) {
+					console.error(error.message);
+				}
+			}
+
+
+			function startCountdown() {
+						document.getElementById('countDown').textContent = '4';
+						setTimeout(() => {
+							document.getElementById('countDown').textContent = '3';
+							setTimeout(() => {
+								document.getElementById('countDown').textContent = '2';
+								document.getElementById('loading').style.transition = 'backdrop-filter 3s ease';
+								document.getElementById('loading').style.backdropFilter = 'blur(0px)';
+								setTimeout(() => {
+									document.getElementById('countDown').textContent = '1';
+									setTimeout(() => {
+										document.getElementById('countDown').style.transition = 'opacity 1s ease';
+										document.getElementById('countDown').style.opacity = '0';
+										document.getElementById('loading').style.transition = 'opacity 1s ease';
+										document.getElementById('loading').style.opacity = '0';
+										setTimeout(() => {
+											document.getElementById('countDown').textContent = '';										
+										document.getElementById('loading').style.display = 'none';	
+										}, 1000);							
+									}, 1000);
+								}, 1000);
+							}, 1000);
+						}, 1000);
+					}
+			
+			
+			// Attach event listener for connectButton
+			connectButton.addEventListener('click', handleConnection);
+
+			function resetDetails() {
+				const allDetailsCells = document.querySelectorAll('td[id$="Details"]');
+			  	allDetailsCells.forEach(cell => {
+					cell.textContent = '';
+			  	});
+				resetUPlotScriptAndValues();		
+			}
+
+
+			function resetUPlotScriptAndValues() {
+				// Reinitialize the data array with empty arrays for each series
+				data = [
+					[], // Placeholder for the x-axis (time or sequence)
+					[], // Placeholder for the y-axis (probability)
+					[], // Placeholder for the y-axis (acceleration x-component)
+					[], // Placeholder for the y-axis (acceleration y-component)
+					[], // Placeholder for the y-axis (acceleration z-component)
+					[], // Placeholder for the y-axis (angular velocity x-component)
+					[], // Placeholder for the y-axis (angular velocity y-component)
+					[], // Placeholder for the y-axis (angular velocity z-component)
+					[], // Placeholder for the y-axis (gravity vector x-component)
+					[], // Placeholder for the y-axis (gravity vector y-component)
+					[], // Placeholder for the y-axis (gravity vector z-component)
+					[], // Placeholder for the y-axis (arm orientation dx-component)
+					[]  // Placeholder for the y-axis (arm orientation dy-component)					
+				];
+
+				// Reset the uPlot chart with the newly initialized data array
+				uplotChart.setData(data);
+			}
+			
+			function changeBackgroundColor(id) {
+				setTimeout(() => {
+					document.getElementById(id).style.backgroundColor = '#434245';
+					setTimeout(() => {
+						document.getElementById(id).style.backgroundColor = '';
+					}, 100);
+				}, 0);
+			}			
+
+			watch.addEventListener('tap', () => {
+				tapCount++;
+				updateDetails('tap', `${tapCount}`);				
+				changeBackgroundColor('tapRow');				
+			});
+
+			watch.addEventListener('button', () => {
+				buttonPressCount++;
+				updateDetails('backButton', `${buttonPressCount}`);
+				changeBackgroundColor('backRow');
+			});
+			
+			watch.addEventListener('rotary', (event) => {
+				const step = event.detail;				
+				if (step === -1) {
+					rotaryCount++;
+					direction = 'right';
+				} else {
+					rotaryCount--;
+					direction = 'left';
+				}
+				updateDetails('rotary', `${rotaryCount}, Direction: ${direction}, Step: ${step}`);				
+				changeBackgroundColor('rotaryRow');
+			});
+
+			watch.addEventListener('connectionstatuschanged', (event) => {
+				if (event.detail) {
+					const status = event.detail;
+					updateDetails('connectionStatus', `Status: ${status}`);					
+					
+				} else {
+					console.error('Event detail is null');
+				}
+			});			
+
+			watch.addEventListener('accelerationchanged', (event) => {
+				if (event.detail) {
+					const { x, y, z } = event.detail;
+					data[0].push(data[0].length);
+					data[1].push(x); // Update with the x-component of acceleration
+					data[2].push(y); // Update with the y-component of acceleration
+					data[3].push(z); // Update with the z-component of acceleration
+					
+					updateDetails('accelerationChanged', `x: ${x}, y: ${y}, z: ${z}`);
+					
+					let trimmedData = trimDataToThreshold(data);
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
+				}
+			});
+
+			watch.addEventListener('angularvelocitychanged', (event) => {
+				if (event.detail) {
+					const { x, y, z } = event.detail;
+					data[4].push(x); // Update with the x-component of angular velocity
+					data[5].push(y); // Update with the y-component of angular velocity
+					data[6].push(z); // Update with the z-component of angular velocity
+					updateDetails('angularVelocityChanged', `x: ${x}, y: ${y}, z: ${z}`);
+				
+					let trimmedData = trimDataToThreshold(data);
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
+				}
+			});
+
+			watch.addEventListener('gravityvectorchanged', (event) => {
+				if (event.detail) {
+					const { x, y, z } = event.detail;
+					data[7].push(x); // Update with the x-component of angular velocity
+					data[8].push(y); // Update with the y-component of angular velocity
+					data[9].push(z); // Update with the z-component of angular velocity
+					updateDetails('gravityVectorChanged', `x: ${x}, y: ${y}, z: ${z}`);
+					
+					let trimmedData = trimDataToThreshold(data);
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
+				}
+			});
+
+			watch.addEventListener('armdirectionchanged', (event) => {
+				if (event.detail) {
+					const { dx, dy } = event.detail;
+					data[10].push(dx); // Update with the dx-component of arm direction
+					data[11].push(dy); // Update with the dy-component of arm direction
+					updateDetails('armDirectionChanged', `dx: ${dx}, dy: ${dy}`);
+						
+					let trimmedData = trimDataToThreshold(data);
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
+				}
+			});
+
+			watch.addEventListener('probability', (event) => {
+				if (event.detail) {
+					const probability = event.detail;					
+					data[12].push(probability*30); 
+					updateDetails('probability', probability);					
+					let trimmedData = trimDataToThreshold(data);
+
+					if (!uPlotPaused) {
+						uplotChart.setData(trimmedData);
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>
