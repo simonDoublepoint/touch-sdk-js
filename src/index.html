@@ -105,20 +105,19 @@
 				</tr>
 			</thead>
 			<tbody id="tableOutput">
-				<tr onclick="document.getElementById('probabilityOscSend').click()" id="probabilityRow">
-					<td><input type="checkbox" id="probabilityOscSend" checked onclick="event.stopPropagation();"></td>
-					<td>Probability</td>
-					<td id="probabilityDetails">Pinch and hold finger and thumb together to see the pinch probability value</td>
-		
 				<tr onclick="document.getElementById('tapOscSend').click()" id="tapRow">
 					<td><input type="checkbox" id="tapOscSend" checked onclick="event.stopPropagation();"></td>
 					<td>Tap</td>
 					<td id="tapDetails">Tap your finger and thumb together to increment the count</td>
 				</tr>
+				<tr onclick="document.getElementById('probabilityOscSend').click()" id="probabilityRow">
+					<td><input type="checkbox" id="probabilityOscSend" checked onclick="event.stopPropagation();"></td>
+					<td>Probability</td>
+					<td id="probabilityDetails">Pinch and hold finger and thumb together to see the pinch probability value<br>(Unavailable via WowMouse app)</td>
 				<tr onclick="document.getElementById('rotaryOscSend').click()" id="rotaryRow">
 					<td><input type="checkbox" id="rotaryOscSend" checked onclick="event.stopPropagation();"></td>
 					<td>Rotary Step</td>
-					<td id="rotaryDetails">Rotate dial or crown to increment the count</td>
+					<td id="rotaryDetails">Rotate dial or crown to increment the count<br>(Unavailable via Doublepoint Kit)</td>
 					
 				</tr>
 				<tr onclick="document.getElementById('backButtonOscSend').click()"id="backRow">
