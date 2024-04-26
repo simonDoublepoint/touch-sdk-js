@@ -72,28 +72,31 @@
 		<button class="reset" onclick="resetUPlotScriptAndValues()"><i class="fa-regular fa-arrow-rotate-right"></i> Reset</button>
 		<button class="pausePlay" onclick="pausePlayPlot()"><i class="fa-solid fa-pause"></i> Pause</button>
 		
-		<section class="intro" >	
-			<div>
-				<h1 style="color: #fff;">Touch SDK <br><span style="color: #0078d4; margin-top: 20px;">Monitor</span></h1>
+		<section class="introHL">	
+			<h1 style="color: #fff;">Touch SDK <br><span style="color: #0078d4; margin-top: 20px;">Monitor</span></h1>
+		</section>
+
+		<section class="introText" >	
+
+			<h3>Receive smartwatch IMU data stream and touch events through any WebBLE browser and send it via OSC to programs such as MaxMSP or Touchdesigner. Reconnect or pause if you experience low framerate. Download the files for best performance. <br> <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here.</a>
+			<br>More tools:</h3>
 			
-				<h3>Receive smartwatch IMU data stream and touch events through any WebBLE browser and send it via OSC to programs such as MaxMSP or Touchdesigner. Reconnect or pause if you experience low framerate. Download the files for best performance. <br> <br>You can <a href="https://github.com/simonDoublepoint/touch-sdk-js/archive/refs/heads/main.zip">download the repo as zip here</a> or <a href="https://github.com/simonDoublepoint/touch-sdk-js">clone the repo here</a> or download only <a href="https://playground.doublepoint.com/monitor-osc/src/oscBridge.zip">oscBridge.zip</a> here.</h3>	
-					
-					
-			</div>
+			<ol>
+				<li>To send OSC messages ensure OSC-Bridge is operational by running <br> <code style="color: #0078d4;">node &lt;pathToOscBridge.js&gt;</code>.</li>
+				<li>Refresh this page</li>
+				<li>Press Connect to pair Watch</li>
+				<li>Click on rows below to send only selected values</li>
+				<li>Move your arm, tap, rotate the dial, touch the screen, press back button to see the OSC messages on your other application</li>
+		
 			
-				<ol>
-					<li>To send OSC messages ensure OSC-Bridge is operational by running <br> <code style="color: #0078d4;">node &lt;pathToOscBridge.js&gt;</code>.</li>
-					<li>Refresh this page</li>
-					<li>Press Connect to pair Watch</li>
-					<li>Click on rows below to send only selected values</li>
-					<li>Move your arm, tap, rotate the dial, touch the screen, press back button to see the OSC messages on your other application</li>
-			
-				
-				</ol>
+			</ol>
 					
 			<p>Address 127.0.0.1 <br>Port 5555 <br><br>
 			Set a different port by modifying oscBridge.js accordingly.</p>
 
+		</section>
+		<section class="introTools">				
+			<a class="btnDrawGame" href="https://quickdraw.withgoogle.com/">Draw Game</a>
 		</section>
 		<table id="outputTable">
 			<thead>
