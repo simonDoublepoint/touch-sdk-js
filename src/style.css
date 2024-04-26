@@ -116,10 +116,29 @@ button.connect, button.reconnect, button.reset, button.pausePlay {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
+}
+
+button.connect, button.reconnect, button.reset, button.pausePlay 
+{
     position: absolute;
     top: 2em;
     right: 2em;
 }
+
+a.btnDrawGame {
+    background-color: #0078d4; /* Blue */
+    color: white;
+    display: block;
+    text-align: center;
+    width: 100px;
+    margin-right: 1em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 button.connect {
     background-color: #4CAF50; /* Green */
     color: white;
@@ -160,14 +179,23 @@ td {
 table td:first-child {
     width: 200px;
 }
-.intro {
+
+.introHL{
+    padding: 4em 0 0 0;
+}
+.introText {
     text-align: left;
     display: flex; 
-    padding: 4em 0;
 }
-.intro p, .intro ol {
+
+.introText p {
     margin-left: 6em;
     font-size: 1em;
+}
+
+.introTools {
+    margin: 2em 0 4em 0;
+    display: flex;
 }
 
 
